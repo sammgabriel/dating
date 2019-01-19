@@ -1,0 +1,12 @@
+{
+  "name": "sgabriel/328/dating",
+  "authors": [
+    {
+      "name": "Samantha Gabriel",
+      "email": "sgabrielr@mail.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
