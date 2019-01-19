@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+/* This file contains CSS for my portfolio and admin page */
+
+/*
+
+   Author Name: Samantha Gabriel
+   Date: December 2, 2018
+   File name: portfolio.css
+
+*/
+
+#couple {
+
+    height: 100%;
+    width: 100%;
+}
+
+#name {
+
+    font-weight: bold;
+}
+
+blockquote {
+
+    font-style: italic;
+}
