@@ -2,7 +2,7 @@
 /**
  *
  * Author Name: Samantha Gabriel
- * Date: 2019-01-18
+ * Date: January 18, 2019
  * File Name: index.php
  *
  * Setting up Fat-Free and URL Routing
