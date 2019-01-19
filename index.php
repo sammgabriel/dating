@@ -1,9 +1,12 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: sammgabriel
+ *
+ * Author Name: Samantha Gabriel
  * Date: 2019-01-18
- * Time: 17:32
+ * File Name: index.php
+ *
+ * Setting up Fat-Free and URL Routing
+ *
  */
 
 //turn on error reporting
