@@ -1,26 +1,29 @@
 @charset "utf-8";
 
-/* This file contains CSS for my portfolio and admin page */
+/* This file contains CSS for the dating website */
 
 /*
 
    Author Name: Samantha Gabriel
-   Date: December 2, 2018
-   File name: portfolio.css
+   Date: January 18, 2019
+   File name: styles.css
 
 */
 
+/* Image ID styles */
 #couple {
 
     height: 100%;
     width: 100%;
 }
 
+/* Span ID styles */
 #name {
 
     font-weight: bold;
 }
 
+/* Paragraph ID styles */
 #quotes {
 
     font-style: italic;
