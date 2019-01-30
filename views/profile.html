@@ -8,5 +8,30 @@
 
 <h1>Profile</h1>
 
+<form action="interests" method="post">
+    <label>Email Address:
+        <input type="text" size="30" maxlength="30"
+               name="email" id="email">
+    </label><br><br>
+
+    <legend>State
+    <select name="state" id="state">
+        <option value="none">Select a State</option>
+    </select></legend><br><br>
+
+    <legend>Seeking</legend>
+    <label><input type="radio" value="male" name="gender" checked="checked">
+        Male</label><br>
+    <label><input type="radio" value="female" name="gender" >
+        Female</label><br><br>
+
+    <label>Biography:<br>
+        <textarea rows="5" cols="20" name="bio"
+                  id="bio">Enter a biography</textarea>
+    </label><br><br>
+
+    <button>Next</button>
+</form>
+
 </body>
 </html>
