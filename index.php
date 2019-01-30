@@ -39,5 +39,11 @@ $f3->route('POST /profile', function(){
     echo $template->render('views/profile.html');
 });
 
+//define a interests route
+$f3->route('POST /interests', function(){
+    $template = new Template();
+    echo $template->render('views/interests.html');
+});
+
 //run fat free
 $f3->run();
