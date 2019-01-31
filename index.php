@@ -28,7 +28,7 @@ $f3->route('GET /', function(){
 });
 
 //define a personal information route
-$f3->route('GET /personal-information', function(){
+$f3->route('POST /personal-information', function(){
     $template = new Template();
     echo $template->render('views/personal-information.html');
 });
@@ -39,10 +39,16 @@ $f3->route('POST /profile', function(){
     echo $template->render('views/profile.html');
 });
 
-//define a interests route
+//define an interests route
 $f3->route('POST /interests', function(){
     $template = new Template();
     echo $template->render('views/interests.html');
+});
+
+//define a summary route
+$f3->route('POST /summary', function(){
+    $template = new Template();
+    echo $template->render('views/summary.html');
 });
 
 //run fat free
