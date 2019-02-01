@@ -32,6 +32,14 @@ function validAge($age) {
 
 //}
 
-//validIndoor
+function validIndoor($indoorActivity) {
 
-//validOutdoor
+    global $f3;
+    return in_array($indoorActivity, $f3->get('indoor'));
+}
+
+function validOutdoor($outdoorActivity) {
+
+    global $f3;
+    return in_array($outdoorActivity, $f3->get('outdoor'));
+}

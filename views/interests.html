@@ -10,26 +10,31 @@
 
 <hr>
 
-<form action="summary" method="post">
+<form action="#" method="post">
 
     <legend>Indoor Interests</legend>
     <label>
         <repeat group="{{ @indoor }}" value="{{ @activity }}">
             <br><input type="checkbox" value="{{ @activity }}"
-                   name="interests[]"> {{ @activity }}
+                   name="indoor[]"> {{ @activity }}
         </repeat>
 
     </label>
+    <check if="{{ isset(@errors['indoor']) }}">
+        <p>{{ @errors['indoor']}}</p>
+    </check><br><br>
 
-    <br><br>
 
     <legend>Outdoor Interests</legend>
     <label>
         <repeat group="{{ @outdoor }}" value="{{ @activity }}">
             <br><input type="checkbox" value="{{ @activity }}"
-                       name="interests[]"> {{ @activity }}
+                       name="outdoor[]"> {{ @activity }}
         </repeat>
-    </label><br><br>
+    </label><br>
+    <check if="{{ isset(@errors['outdoor']) }}">
+        <p>{{ @errors['outdoor']}}</p>
+    </check><br><br>
 
     <button>Next</button>
 </form>

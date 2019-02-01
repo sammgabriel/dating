@@ -51,6 +51,7 @@ $f3->route('GET|POST /personal-information',
         if (validName($firstName)) {
 
             $_SESSION['fname'] = $firstName;
+            $f3->set("fname", $_SESSION["fname"]);
 
         } else {
 
@@ -66,6 +67,7 @@ $f3->route('GET|POST /personal-information',
         if (validName($lastName)) {
 
             $_SESSION['lname'] = $lastName;
+            $f3->set("lname", $_SESSION["lname"]);
 
 
         } else {
@@ -80,6 +82,7 @@ $f3->route('GET|POST /personal-information',
         if (validAge($age)) {
 
             $_SESSION['age'] = $age;
+            $f3->set("age", $_SESSION["age"]);
 
 
         } else {
@@ -93,6 +96,10 @@ $f3->route('GET|POST /personal-information',
         $f3->reroute('/profile');
     }
 
+    $_SESSION["gender"] = $_POST['gender'];
+    $f3->set("gender", $_SESSION["gender"]);
+    $_SESSION["phone"] = $_POST['phone'];
+    $f3->set("phone", $_SESSION["phone"]);
     $template = new Template();
     echo $template->render('views/personal-information.html');
 });
@@ -101,6 +108,8 @@ $f3->route('GET|POST /personal-information',
 $f3->route('GET|POST /profile',
 
     function($f3){
+
+    $_SESSION = array();
 
     $states = array("Oregon"=>"OREGON", "California"=>"CALIFORNIA", "Alabama"=>"ALABAMA",
         "Washington"=>"WASHINGTON", "Nevada"=>"NEVADA", "Idaho"=>"IDAHO", "Utah"=>"UTAH",
@@ -123,6 +132,12 @@ $f3->route('GET|POST /profile',
 
     $f3->set('states', $states);
 
+    $_SESSION["email"] = $_POST['email'];
+    $f3->set("email", $_SESSION["email"]);
+    $_SESSION["state"] = $_POST['state'];
+    $f3->set("state", $_SESSION["state"]);
+    $_SESSION["seekng"] = $_POST['seekng'];
+    $f3->set("seekng", $_SESSION["seekng"]);
     $template = new Template();
     echo $template->render('views/profile.html');
 });
@@ -131,6 +146,8 @@ $f3->route('GET|POST /profile',
 $f3->route('GET|POST /interests',
 
     function($f3){
+
+        $_SESSION = array();
 
         $indoor = array("tv", "puzzles", "movies", "reading",
             "cooking", "playing cards", "board games",
@@ -142,6 +159,49 @@ $f3->route('GET|POST /interests',
         $f3->set('indoor', $indoor);
 
         $f3->set('outdoor', $outdoor);
+
+        $outdoorHobbies = $_POST['outdoor'];
+        $indoorHobbies = $_POST['indoor'];
+        $hobby = null;
+        $activity = null;
+
+        if (isset($_POST['indoor'])) {
+
+
+            foreach ($indoorHobbies as $hobby) {
+
+                if (validIndoor($hobby)) {
+
+                    $_SESSION['indoor'] = $hobby;
+
+
+                } else {
+
+                    $f3->set("errors['indoor']", "Please pick a valid indoor activity.");
+                }
+            }
+        }
+
+        if (isset($_POST['outdoor'])) {
+
+            foreach ($outdoorHobbies as $activity) {
+
+                if (validOutdoor($activity)) {
+
+                    $_SESSION['outdoor'] = $activity;
+
+
+                } else {
+
+                    $f3->set("errors['outdoor']", "Please pick a valid outdoor activity.");
+                }
+            }
+        }
+
+        if (validIndoor($hobby) && validOutdoor($activity)) {
+
+            $f3->reroute('/summary');
+        }
 
     $template = new Template();
     echo $template->render('views/interests.html');
