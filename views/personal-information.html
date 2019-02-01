@@ -8,20 +8,29 @@
 
 <h1>Personal Information</h1>
 
-<form action="profile" method="post">
+<form action="#" method="post">
     <label>First Name:
         <input type="text" size="20" maxlength="20"
                name="fname" id="fname">
-    </label><br><br>
+    </label><br>
+    <check if="{{ isset(@errors['fname']) }}">
+        <p>{{ @errors['fname']}}</p>
+    </check><br><br>
     <label>Last Name:
         <input type="text" size="20" maxlength="20"
                name="lname" id="lname">
-    </label><br><br>
+    </label><br>
+    <check if="{{ isset(@errors['lname']) }}">
+        <p>{{ @errors['lname']}}</p>
+    </check><br><br>
 
     <label>Age:
         <input type="text" size="20" maxlength="20"
                name="age" id="age">
-    </label><br><br>
+    </label><br>
+    <check if="{{ isset(@errors['age']) }}">
+        <p>{{ @errors['age']}}</p>
+    </check><br><br>
 
     <label><input type="radio" value="male" name="gender" checked="checked">
         Male</label><br>
