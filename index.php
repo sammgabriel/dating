@@ -28,6 +28,7 @@ $f3 = Base::instance();
 //turn on fat free error reporting
 $f3->set('DEBUG',3);
 
+
 //define a default route
 $f3->route('GET /', function(){
     $template = new Template();
@@ -39,8 +40,6 @@ $f3->route('GET|POST /personal-information',
 
     function($f3){
 
-    $_SESSION = array();
-
     $firstName = $_POST['fname'];
     $lastName = $_POST['lname'];
     $age = $_POST['age'];
@@ -51,13 +50,10 @@ $f3->route('GET|POST /personal-information',
         if (validName($firstName)) {
 
             $_SESSION['fname'] = $firstName;
-            $f3->set("fname", $_SESSION["fname"]);
 
         } else {
 
             $f3->set("errors['fname']", "Please enter a first name");
-
-
         }
     }
 
@@ -67,8 +63,6 @@ $f3->route('GET|POST /personal-information',
         if (validName($lastName)) {
 
             $_SESSION['lname'] = $lastName;
-            $f3->set("lname", $_SESSION["lname"]);
-
 
         } else {
 
@@ -82,8 +76,6 @@ $f3->route('GET|POST /personal-information',
         if (validAge($age)) {
 
             $_SESSION['age'] = $age;
-            $f3->set("age", $_SESSION["age"]);
-
 
         } else {
 
@@ -93,13 +85,11 @@ $f3->route('GET|POST /personal-information',
 
     if (validName($firstName) && validName($lastName) && validAge($age)) {
 
+        $_SESSION['gender'] = $_POST['gender'];
+        $_SESSION['phone'] = $_POST['phone'];
         $f3->reroute('/profile');
     }
 
-    $_SESSION["gender"] = $_POST['gender'];
-    $f3->set("gender", $_SESSION["gender"]);
-    $_SESSION["phone"] = $_POST['phone'];
-    $f3->set("phone", $_SESSION["phone"]);
     $template = new Template();
     echo $template->render('views/personal-information.html');
 });
@@ -108,8 +98,6 @@ $f3->route('GET|POST /personal-information',
 $f3->route('GET|POST /profile',
 
     function($f3){
-
-    $_SESSION = array();
 
     $states = array("Oregon"=>"OREGON", "California"=>"CALIFORNIA", "Alabama"=>"ALABAMA",
         "Washington"=>"WASHINGTON", "Nevada"=>"NEVADA", "Idaho"=>"IDAHO", "Utah"=>"UTAH",
@@ -132,12 +120,11 @@ $f3->route('GET|POST /profile',
 
     $f3->set('states', $states);
 
-    $_SESSION["email"] = $_POST['email'];
-    $f3->set("email", $_SESSION["email"]);
-    $_SESSION["state"] = $_POST['state'];
-    $f3->set("state", $_SESSION["state"]);
-    $_SESSION["seekng"] = $_POST['seekng'];
-    $f3->set("seekng", $_SESSION["seekng"]);
+    $_SESSION['email'] = $_POST['email'];
+    $_SESSION['state'] = $_POST['state'];
+    $_SESSION['seeking'] = $_POST['seeking'];
+    $_SESSION['bio'] = $_POST['bio'];
+
     $template = new Template();
     echo $template->render('views/profile.html');
 });
@@ -146,8 +133,6 @@ $f3->route('GET|POST /profile',
 $f3->route('GET|POST /interests',
 
     function($f3){
-
-        $_SESSION = array();
 
         $indoor = array("tv", "puzzles", "movies", "reading",
             "cooking", "playing cards", "board games",
@@ -209,6 +194,7 @@ $f3->route('GET|POST /interests',
 
 //define a summary route
 $f3->route('GET|POST /summary', function(){
+
     $template = new Template();
     echo $template->render('views/summary.html');
 });
