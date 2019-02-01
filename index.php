@@ -40,54 +40,57 @@ $f3->route('GET|POST /personal-information',
 
     function($f3){
 
-    $firstName = $_POST['fname'];
-    $lastName = $_POST['lname'];
-    $age = $_POST['age'];
+    if (isset($_POST['submit'])) {
 
-    if (isset($_POST['fname'])) {
+        $firstName = $_POST['fname'];
+        $lastName = $_POST['lname'];
+        $age = $_POST['age'];
+
+        if (isset($_POST['fname'])) {
 
 
-        if (validName($firstName)) {
+            if (validName($firstName)) {
 
-            $_SESSION['fname'] = $firstName;
+                $_SESSION['fname'] = $firstName;
 
-        } else {
+            } else {
 
-            $f3->set("errors['fname']", "Please enter a first name");
+                $f3->set("errors['fname']", "Please enter a first name");
+            }
         }
-    }
 
-    if (isset($_POST['lname'])) {
+        if (isset($_POST['lname'])) {
 
 
-        if (validName($lastName)) {
+            if (validName($lastName)) {
 
-            $_SESSION['lname'] = $lastName;
+                $_SESSION['lname'] = $lastName;
 
-        } else {
+            } else {
 
-            $f3->set("errors['lname']", "Please enter a last name");
+                $f3->set("errors['lname']", "Please enter a last name");
+            }
         }
-    }
 
-    if (isset($_POST['age'])) {
+        if (isset($_POST['age'])) {
 
 
-        if (validAge($age)) {
+            if (validAge($age)) {
 
-            $_SESSION['age'] = $age;
+                $_SESSION['age'] = $age;
 
-        } else {
+            } else {
 
-            $f3->set("errors['age']", "Please enter a valid age (Note: You must be 18 years old or older to use this website.)");
+                $f3->set("errors['age']", "Please enter a valid age (Note: You must be 18 years old or older to use this website.)");
+            }
         }
-    }
 
-    if (validName($firstName) && validName($lastName) && validAge($age)) {
+        if (validName($firstName) && validName($lastName) && validAge($age)) {
 
-        $_SESSION['gender'] = $_POST['gender'];
-        $_SESSION['phone'] = $_POST['phone'];
-        $f3->reroute('/profile');
+            $_SESSION['gender'] = $_POST['gender'];
+            $_SESSION['phone'] = $_POST['phone'];
+            $f3->reroute('/profile');
+        }
     }
 
     $template = new Template();
@@ -99,8 +102,8 @@ $f3->route('GET|POST /profile',
 
     function($f3){
 
-    $states = array("Oregon"=>"OREGON", "California"=>"CALIFORNIA", "Alabama"=>"ALABAMA",
-        "Washington"=>"WASHINGTON", "Nevada"=>"NEVADA", "Idaho"=>"IDAHO", "Utah"=>"UTAH",
+    $f3->set('states', array("Washington" => "WASHINGTON", "Oregon" => "OREGON", "California" => "CALIFORNIA", 'Alabama' => 'ALABAMA',
+        "Nevada"=>"NEVADA", "Idaho"=>"IDAHO", "Utah"=>"UTAH",
         "Arizona"=>"ARIZONA", "Alaska"=>"ALASKA", "Hawaii"=>"HAWAII", "Montana"=>"MONTANA",
         "Wyoming"=>"WYOMING", "Colorado"=>"COLORADO", "New Mexico"=>"NEW MEXICO",
         "North Dakota"=>"NORTH DAKOTA", "South Dakota"=>"SOUTH DAKOTA", "Nebraska"=>"NEBRASKA",
@@ -114,16 +117,16 @@ $f3->route('GET|POST /profile',
         "Vermont"=>"VERMONT", "Massachusetts"=>"MASSACHUSETTS", "New York"=>"NEW YORK",
         "Pennsylvania"=>"PENNSYLVANIA", "Rhode Island"=>"RHODE ISLAND", "Connecticut"=>"CONNECTICUT",
         "New Jersey"=>"NEW JERSEY", "Delaware"=>"DELAWARE", "Maryland"=>"MARYLAND",
-        "Washington DC"=>"WASHINGTON D.C.");
+        "Washington DC"=>"WASHINGTON D.C."));
 
-    sort($states);
+    if (isset($_POST['submit'])) {
 
-    $f3->set('states', $states);
-
-    $_SESSION['email'] = $_POST['email'];
-    $_SESSION['state'] = $_POST['state'];
-    $_SESSION['seeking'] = $_POST['seeking'];
-    $_SESSION['bio'] = $_POST['bio'];
+        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['state'] = $_POST['state'];
+        $_SESSION['seeking'] = $_POST['seeking'];
+        $_SESSION['bio'] = $_POST['bio'];
+        $f3->reroute('/interests');
+    }
 
     $template = new Template();
     echo $template->render('views/profile.html');
@@ -133,6 +136,7 @@ $f3->route('GET|POST /profile',
 $f3->route('GET|POST /interests',
 
     function($f3){
+
 
         $indoor = array("tv", "puzzles", "movies", "reading",
             "cooking", "playing cards", "board games",
@@ -149,43 +153,49 @@ $f3->route('GET|POST /interests',
         $indoorHobbies = $_POST['indoor'];
         $hobby = null;
         $activity = null;
+        $activities = [];
 
-        if (isset($_POST['indoor'])) {
+        if (isset($_POST['submit'])) {
 
-
-            foreach ($indoorHobbies as $hobby) {
-
-                if (validIndoor($hobby)) {
-
-                    $_SESSION['indoor'] = $hobby;
+            if (isset($_POST['indoor'])) {
 
 
-                } else {
+                foreach ($indoorHobbies as $hobby) {
 
-                    $f3->set("errors['indoor']", "Please pick a valid indoor activity.");
+                    if (validIndoor($hobby)) {
+
+                        array_push($activities, $hobby);
+
+
+                    } else {
+
+                        $f3->set("errors['indoor']", "Please pick a valid indoor activity.");
+                    }
                 }
             }
-        }
 
-        if (isset($_POST['outdoor'])) {
+            if (isset($_POST['outdoor'])) {
 
-            foreach ($outdoorHobbies as $activity) {
+                foreach ($outdoorHobbies as $activity) {
 
-                if (validOutdoor($activity)) {
+                    if (validOutdoor($activity)) {
 
-                    $_SESSION['outdoor'] = $activity;
+                        array_push($activities, $activity);
 
 
-                } else {
+                    } else {
 
-                    $f3->set("errors['outdoor']", "Please pick a valid outdoor activity.");
+                        $f3->set("errors['outdoor']", "Please pick a valid outdoor activity.");
+                    }
                 }
             }
-        }
 
-        if (validIndoor($hobby) && validOutdoor($activity)) {
+            if (validIndoor($hobby) && validOutdoor($activity)) {
 
-            $f3->reroute('/summary');
+                $activities = implode(" ", $activities);
+                $_SESSION['interests'] = $activities;
+                $f3->reroute('/summary');
+            }
         }
 
     $template = new Template();

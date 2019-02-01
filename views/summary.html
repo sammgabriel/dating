@@ -8,6 +8,23 @@
 
     <h1>Profile Summary</h1>
     <p>Name: {{ @SESSION['fname'] }} {{ @SESSION['lname'] }}</p>
+    <p>Gender: {{ @SESSION['gender'] }}</p>
+    <p>Phone Number: {{ @SESSION['phone'] }}</p>
+    <p>Email: {{ @SESSION['email'] }}</p>
+    <p>State: {{ @SESSION['state'] }}</p>
+    <p>Seeking: {{ @SESSION['seeking'] }}</p>
+    <p>Interests: {{ @SESSION['interests'] }}
+        <!-- <repeat group="{{ @indoor }}" value="{{ @activity }}">
+            <br><input type="checkbox" value="{{ @activity }}"
+                       name="indoor[]">{{ @activity }}
+        </repeat>
+        <repeat group="{{ @indoor }}" value="{{ @activity }}">
+            <br><input type="checkbox" value="{{ @activity }}"
+                       name="indoor[]"> {{ @activity }}
+        </repeat> -->
+    </p>
+    <p>Bio: {{ @SESSION['bio'] }}</p>
+
 
 </body>
 </html>
