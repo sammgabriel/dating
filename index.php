@@ -7,6 +7,8 @@
  *
  * Setting up Fat-Free and URL Routing
  *
+ * https://www.w3schools.com/php/php_arrays_sort.asp
+ *
  */
 
 //turn on error reporting
@@ -33,7 +35,9 @@ $f3->route('GET /', function(){
 });
 
 //define a personal information route
-$f3->route('GET|POST /personal-information', function($f3){
+$f3->route('GET|POST /personal-information',
+
+    function($f3){
 
     $_SESSION = array();
 
@@ -82,7 +86,6 @@ $f3->route('GET|POST /personal-information', function($f3){
 
             $f3->set("errors['age']", "Please enter a valid age (Note: You must be 18 years old or older to use this website.)");
         }
-
     }
 
     if (validName($firstName) && validName($lastName) && validAge($age)) {
@@ -95,19 +98,57 @@ $f3->route('GET|POST /personal-information', function($f3){
 });
 
 //define a profile route
-$f3->route('GET|POST /profile', function(){
+$f3->route('GET|POST /profile',
+
+    function($f3){
+
+    $states = array("Oregon"=>"OREGON", "California"=>"CALIFORNIA", "Alabama"=>"ALABAMA",
+        "Washington"=>"WASHINGTON", "Nevada"=>"NEVADA", "Idaho"=>"IDAHO", "Utah"=>"UTAH",
+        "Arizona"=>"ARIZONA", "Alaska"=>"ALASKA", "Hawaii"=>"HAWAII", "Montana"=>"MONTANA",
+        "Wyoming"=>"WYOMING", "Colorado"=>"COLORADO", "New Mexico"=>"NEW MEXICO",
+        "North Dakota"=>"NORTH DAKOTA", "South Dakota"=>"SOUTH DAKOTA", "Nebraska"=>"NEBRASKA",
+        "Kansas"=>"KANSAS", "Oklahoma"=>"OKLAHOMA", "Texas"=>"TEXAS", "Minnesota"=>"MINNESOTA",
+        "Iowa"=>"IOWA", "Missouri"=>"MISSOURI", "Arkansas"=>"ARKANSAS", "Louisiana"=>"LOUISIANA",
+        "Wisconsin"=>"WISCONSIN", "Illinois"=>"ILLINOIS", "Mississippi"=>"MISSISSIPPI",
+        "Michigan"=>"MICHIGAN", "Indiana"=>"INDIANA", "Kentucky"=>"KENTUCKY",
+        "Tennessee"=>"TENNESSEE", "Ohio"=>"OHIO", "West Virginia"=>"WEST VIRGINIA",
+        "Virginia"=>"VIRGINIA", "North Carolina"=>"NORTH CAROLINA", "South Carolina"=>"SOUTH CAROLINA",
+        "Georgia"=>"GEORGIA", "Florida"=>"FLORIDA", "Maine"=>"MAINE", "New Hampshire"=>"NEW HAMPSHIRE",
+        "Vermont"=>"VERMONT", "Massachusetts"=>"MASSACHUSETTS", "New York"=>"NEW YORK",
+        "Pennsylvania"=>"PENNSYLVANIA", "Rhode Island"=>"RHODE ISLAND", "Connecticut"=>"CONNECTICUT",
+        "New Jersey"=>"NEW JERSEY", "Delaware"=>"DELAWARE", "Maryland"=>"MARYLAND",
+        "Washington DC"=>"WASHINGTON D.C.");
+
+    sort($states);
+
+    $f3->set('states', $states);
+
     $template = new Template();
     echo $template->render('views/profile.html');
 });
 
 //define an interests route
-$f3->route('POST /interests', function(){
+$f3->route('GET|POST /interests',
+
+    function($f3){
+
+        $indoor = array("tv", "puzzles", "movies", "reading",
+            "cooking", "playing cards", "board games",
+            "video games");
+
+        $outdoor = array("hiking", "walking", "biking", "climbing",
+            "swimming", "collecting");
+
+        $f3->set('indoor', $indoor);
+
+        $f3->set('outdoor', $outdoor);
+
     $template = new Template();
     echo $template->render('views/interests.html');
 });
 
 //define a summary route
-$f3->route('POST /summary', function(){
+$f3->route('GET|POST /summary', function(){
     $template = new Template();
     echo $template->render('views/summary.html');
 });

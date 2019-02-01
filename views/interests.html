@@ -14,62 +14,21 @@
 
     <legend>Indoor Interests</legend>
     <label>
-        <input type="checkbox" value="tv"
-               name="interests[]"> TV
-    </label><br>
-    <label>
-        <input type="checkbox" value="puzzles"
-               name="interests[]"> Puzzles
-    </label><br>
-    <label>
-        <input type="checkbox" value="movies"
-               name="interests[]"> Movies
-    </label><br>
-    <label>
-        <input type="checkbox" value="reading"
-               name="interests[]"> Reading
-    </label><br>
-    <label>
-        <input type="checkbox" value="cooking"
-               name="interests[]"> Cooking
-    </label><br>
-    <label>
-        <input type="checkbox" value="cards"
-               name="interests[]"> Playing Cards
-    </label><br>
-    <label>
-        <input type="checkbox" value="boards"
-               name="interests[]"> Board Games
-    </label><br>
-    <label>
-        <input type="checkbox" value="games"
-               name="interests[]"> Video Games
-    </label><br><br>
+        <repeat group="{{ @indoor }}" value="{{ @activity }}">
+            <br><input type="checkbox" value="{{ @activity }}"
+                   name="interests[]"> {{ @activity }}
+        </repeat>
+
+    </label>
+
+    <br><br>
 
     <legend>Outdoor Interests</legend>
     <label>
-        <input type="checkbox" value="hiking"
-               name="interests[]">Hiking
-    </label><br>
-    <label>
-        <input type="checkbox" value="walking"
-               name="interests[]"> Walking
-    </label><br>
-    <label>
-        <input type="checkbox" value="biking"
-               name="interests[]"> Biking
-    </label><br>
-    <label>
-        <input type="checkbox" value="climbing"
-               name="interests[]"> Climbing
-    </label><br>
-    <label>
-        <input type="checkbox" value="swimming"
-               name="interests[]"> Swimming
-    </label><br>
-    <label>
-        <input type="checkbox" value="collecting"
-               name="interests[]"> Collecting
+        <repeat group="{{ @outdoor }}" value="{{ @activity }}">
+            <br><input type="checkbox" value="{{ @activity }}"
+                       name="interests[]"> {{ @activity }}
+        </repeat>
     </label><br><br>
 
     <button>Next</button>

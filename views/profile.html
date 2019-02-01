@@ -16,7 +16,9 @@
 
     <legend>State
     <select name="state" id="state">
-        <option value="none">Select a State</option>
+        <repeat group="{{ @states }}" key="{{ @state }}" value="{{ @value }}">
+            <option value="{{ @state }}">{{ @value }}</option>
+        </repeat>
     </select></legend><br><br>
 
     <legend>Seeking</legend>
@@ -26,7 +28,7 @@
         Female</label><br><br>
 
     <label>Biography:<br>
-        <textarea rows="5" cols="20" name="bio"
+        <textarea rows="5" cols="100" name="bio"
                   id="bio">Enter a biography</textarea>
     </label><br><br>
 
