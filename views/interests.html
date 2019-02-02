@@ -12,66 +12,65 @@
     <p>My Dating Website</p>
 </nav>
 
-<h1 class="mt-4">Interests</h1>
+<div class="container">
 
-<hr>
+    <h1 class="mt-4">Interests</h1>
 
-<form action="#" method="post">
+    <hr>
 
-    <legend>Indoor Interests</legend>
-    <label>
-        <repeat group="{{ @indoor }}" value="{{ @activity }}">
+    <form action="#" method="post">
 
-            <!--<check if="{{ isset(@SESSION['indoor']) }}">
-                <true>
-                    <br><input type="checkbox" value="{{ @activity }}"
-                               name="indoor[]" checked="checked"> {{ @activity }}
-                </true>
-                <false>
-                    <br><input type="checkbox" value="{{ @activity }}"
-                               name="indoor[]" > {{ @activity }}
-                </false>
-            </check> -->
+    <div class="row">
 
-            <br><input type="checkbox" value="{{ @activity }}"
-                       name="indoor[]" > {{ @activity }}
+        <div class="col-1"></div>
 
-        </repeat>
+        <div class="col-10">
+            <label class="font-weight-bold mb-3">Indoor Interests</label><br>
+            <div class="form-check form-check-inline flex-wrap">
+                <repeat group="{{ @indoor }}" value="{{ @activity }}">
+                    <div class="col-3">
+                        <input class="form-check-input checkbox-inline" type="checkbox" value="{{ @activity }}" name="indoor[]">
+                        <label class="form-check-label mr-3">{{ @activity }}</label>
+                    </div>
+                </repeat>
+            </div><br><br>
+            <check if="{{ isset(@errors['indoor']) }}">
+                <p>{{ @errors['indoor']}}</p>
+            </check>
+        </div>
 
-    </label>
-    <check if="{{ isset(@errors['indoor']) }}">
-        <p>{{ @errors['indoor']}}</p>
-    </check><br><br>
+    </div>
 
+    <div class="row">
 
-    <legend>Outdoor Interests</legend>
-    <label>
-        <repeat group="{{ @outdoor }}" value="{{ @activity }}">
+        <div class="col-1"></div>
 
-            <!-- <check if="{{ isset(@SESSION['outdoor']) }}">
-                <true>
-                    <br><input type="checkbox" value="{{ @activity }}"
-                               name="outdoor[]" checked="checked"> {{ @activity }}
-                </true>
-                <false>
-                    <br><input type="checkbox" value="{{ @activity }}"
-                               name="outdoor[]" > {{ @activity }}
-                </false>
-            </check> -->
+        <div class="col-10">
+            <label class="font-weight-bold">Outdoor Interests</label><br>
+            <div class="form-check form-check-inline flex-wrap">
+                <repeat group="{{ @outdoor }}" value="{{ @activity }}">
+                    <div class="col-3">
+                        <input class="form-check-input" type="checkbox" value="{{ @activity }}" name="outdoor[]">
+                        <label class="form-check-label mr-3">{{ @activity }}</label>
+                    </div>
+                </repeat>
+            </div><br><br>
+            <check if="{{ isset(@errors['outdoor']) }}">
+                <p>{{ @errors['outdoor']}}</p>
+            </check>
+        </div>
 
-            <br><input type="checkbox" value="{{ @activity }}"
-                       name="outdoor[]" > {{ @activity }}
-        </repeat>
-    </label><br>
-    <check if="{{ isset(@errors['outdoor']) }}">
-        <p>{{ @errors['outdoor']}}</p>
-    </check><br><br>
+    </div>
 
-    <button name="submit">Next</button>
-</form>
+    <div class="row">
+        <div class="col-11">
+            <button class="btn btn-primary float-right mb-4" name="submit">Next ></button>
+        </div>
+    </div>
 
+    </form>
 
-
+</div>
 
 </body>
 </html>

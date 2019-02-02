@@ -36,13 +36,14 @@
             <div class="form-group">
                 <label class="font-weight-bold">State:</label><br>
                 <select name="state" id="state" class="form-control">
+                    <option value="">Select a State</option>
                     <repeat group="{{ @states }}" key="{{ @state }}" value="{{ @value }}">
                         <check if="{{ @value == @stateChoice }}">
                             <true>
-                                <option value="{{ @state }}" selected="selected">{{ @value }}</option><br>
+                                <option value="{{ @state }}" selected="selected">{{ @value }}</option>
                             </true>
                             <false>
-                                <option value="{{ @state }}">{{ @value }}</option><br>{{ @value }}<br>
+                                <option value="{{ @state }}">{{ @value }}</option>
                             </false>
                         </check>
                     </repeat>
