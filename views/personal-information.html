@@ -1,33 +1,44 @@
+<!-- https://getbootstrap.com/docs/4.2/getting-started/introduction/-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
     <title>Personal Information</title>
 </head>
 <body>
 
 <nav class="navbar bg-light navbar-light">
-
     <p>Dating Website</p>
-
 </nav>
 
 <div class="container-fluid">
-    <div class="row mt-4 mb-4">
+
+    <h1 class="mt-4">Personal Information</h1>
+
+    <hr>
+
+    <div class="row mb-4">
+
 
         <div class="col-1"></div>
 
 
         <div class="col-6 ">
 
-            <h1>Personal Information</h1>
 
             <form action="#" method="post" class="mt-4">
                 <div class="form-group">
                     <label class="font-weight-bold">First Name:</label><br>
-                    <input type="text" class="form-control" name="fname" id="fname" value="{{ @SESSION['fname'] }}">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="fname" id="fname" value="{{ @SESSION['fname'] }}">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-address-card"></i></span>
+                        </div>
+                    </div>
                     <check if="{{ isset(@errors['fname']) }}">
                         <p>{{ @errors['fname']}}</p>
                     </check>
@@ -73,7 +84,7 @@
                     </check>
                 </div>
 
-                <button class="btn btn-primary mt-3" name="submit">Next ></button>
+                <button class="btn btn-primary float-right mt-3" name="submit">Next ></button>
             </form>
         </div>
 
@@ -82,20 +93,8 @@
                 <a href="#">privacy policy</a>. Profile information can only be viewed by others with
                 your permission.</p><br>
         </div>
-
-
-
     </div>
 </div>
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>

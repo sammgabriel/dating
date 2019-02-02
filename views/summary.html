@@ -4,27 +4,54 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <title>Profile Summary</title>
 </head>
 <body>
 
-    <h1>Profile Summary</h1>
-    <p>Name: {{ @SESSION['fname'] }} {{ @SESSION['lname'] }}</p>
-    <p>Gender: {{ @SESSION['gender'] }}</p>
-    <p>Phone Number: {{ @SESSION['phone'] }}</p>
-    <p>Email: {{ @SESSION['email'] }}</p>
-    <p>State: {{ @SESSION['state'] }}</p>
-    <p>Seeking: {{ @SESSION['seeking'] }}</p>
-    <p>Interests:
-        <repeat group="{{ @SESSION['indoor'] }}" value="{{ @activity }}">
-            {{ @activity }}
-        </repeat>
-        <repeat group="{{ @SESSION['outdoor'] }}" value="{{ @hobby }}">
-            {{ @hobby }}
-        </repeat>
-    </p>
-    <p>Bio: {{ @SESSION['bio'] }}</p>
+<nav class="navbar bg-light navbar-light">
 
+    <p>Dating Website</p>
+
+</nav>
+
+<div class="container-fluid">
+    <div class="row mt-4 mb-4">
+
+        <div class="col-1"></div>
+
+
+        <div class="col-5">
+
+            <ul class="list-group">
+
+                <li class="list-group-item">Name: {{ @SESSION['fname'] }} {{ @SESSION['lname'] }}</li>
+                <li class="list-group-item">Gender: {{ @SESSION['gender'] }}</li>
+                <li class="list-group-item">Phone Number: {{ @SESSION['phone'] }}</li>
+                <li class="list-group-item">Email: {{ @SESSION['email'] }}</li>
+                <li class="list-group-item">State: {{ @SESSION['state'] }}</li>
+                <li class="list-group-item">Seeking: {{ @SESSION['seeking'] }}</li>
+                <li class="list-group-item">Interests:
+                    <repeat group="{{ @SESSION['indoor'] }}" value="{{ @activity }}">
+                        {{ @activity }}
+                    </repeat>
+                    <repeat group="{{ @SESSION['outdoor'] }}" value="{{ @hobby }}">
+                        {{ @hobby }}
+                    </repeat>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-4 text-center">
+            <p><i class="fas fa-user fa-10x"></i></p>
+            <p class="text-left mt-4">Biography: {{ @SESSION['bio'] }}</p>
+
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <button class="btn btn-primary" name="submit">Contact Me!</button>
+    </div>
+</div>
 
 </body>
 </html>
