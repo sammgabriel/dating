@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
     <title>Personal Information</title>
 </head>
 <body>
@@ -11,14 +13,14 @@
 <form action="#" method="post">
     <label>First Name:
         <input type="text" size="20" maxlength="20"
-               name="fname" id="fname">
+               name="fname" id="fname" value="{{ @SESSION['fname'] }}">
     </label><br>
     <check if="{{ isset(@errors['fname']) }}">
         <p>{{ @errors['fname']}}</p>
     </check><br><br>
     <label>Last Name:
         <input type="text" size="20" maxlength="20"
-               name="lname" id="lname">
+               name="lname" id="lname" value="{{ @SESSION['lname'] }}">
     </label><br>
     <check if="{{ isset(@errors['lname']) }}">
         <p>{{ @errors['lname']}}</p>
@@ -26,21 +28,29 @@
 
     <label>Age:
         <input type="text" size="20" maxlength="20"
-               name="age" id="age">
+               name="age" id="age" value="{{ @SESSION['age'] }}">
     </label><br>
     <check if="{{ isset(@errors['age']) }}">
         <p>{{ @errors['age']}}</p>
     </check><br><br>
 
-    <label><input type="radio" value="male" name="gender" checked="checked">
-        Male</label><br>
-    <label><input type="radio" value="female" name="gender" >
-        Female</label><br><br>
+    <legend>Gender</legend>
+    <label><repeat group="{{ @gender }}" value="{{ @value }}">
+        <input type="radio" value="{{ @value }}" name="gender"
+                      id="gender">&nbsp;{{ @value }}<br>
+    </repeat>
+    </label>
 
-    <label>Phone Number:
+
+    <br><br>
+
+    <label>Phone Number (i.e. 5551234567):
         <input type="text" size="20" maxlength="20"
-               name="phone" id="phone">
-    </label><br><br>
+               name="phone" id="phone" value="{{ @SESSION['phone'] }}">
+    </label><br>
+    <check if="{{ isset(@errors['phone']) }}">
+        <p>{{ @errors['phone']}}</p>
+    </check><br><br>
 
     <p>Note: All information entered is protected by our privacy policy. Profile information
         can only be viewed by others with your permission.</p><br>

@@ -7,9 +7,13 @@
  *
  * Setting up Fat-Free and URL Routing
  *
- * https://www.w3schools.com/php/php_arrays_sort.asp
+ * https://www.w3schools.com/php/func_string_implode.asp
+ * https://www.w3schools.com/php/php_ref_array.asp
+ * https://stackoverflow.com/questions/21565164/format-phone-number-in-php
  *
  */
+
+//TODO make fields sticky
 
 //turn on error reporting
 ini_set('display_errors',1);
@@ -40,11 +44,17 @@ $f3->route('GET|POST /personal-information',
 
     function($f3){
 
+    $f3->set('gender', array("Male", "Female"));
+
     if (isset($_POST['submit'])) {
 
         $firstName = $_POST['fname'];
         $lastName = $_POST['lname'];
         $age = $_POST['age'];
+        $phone = $_POST['phone'];
+        $gender = $_POST['gender'];
+        $_SESSION['gender'] = $gender;
+
 
         if (isset($_POST['fname'])) {
 
@@ -85,12 +95,25 @@ $f3->route('GET|POST /personal-information',
             }
         }
 
-        if (validName($firstName) && validName($lastName) && validAge($age)) {
+        if (isset($_POST['phone'])) {
 
-            $_SESSION['gender'] = $_POST['gender'];
-            $_SESSION['phone'] = $_POST['phone'];
+
+            if (validPhone($phone)) {
+
+                $_SESSION['phone'] = $phone;
+
+            } else {
+
+                $f3->set("errors['phone']", "Please enter a valid phone number with 
+                    no characters (i.e. 5551234567).");
+            }
+        }
+
+        if (validName($firstName) && validName($lastName) && validAge($age) && validPhone($phone)) {
+
             $f3->reroute('/profile');
         }
+
     }
 
     $template = new Template();
@@ -101,6 +124,8 @@ $f3->route('GET|POST /personal-information',
 $f3->route('GET|POST /profile',
 
     function($f3){
+
+    $f3->set('seeking', array("Male", "Female"));
 
     $f3->set('states', array("Washington" => "WASHINGTON", "Oregon" => "OREGON", "California" => "CALIFORNIA", 'Alabama' => 'ALABAMA',
         "Nevada"=>"NEVADA", "Idaho"=>"IDAHO", "Utah"=>"UTAH",
@@ -194,8 +219,9 @@ $f3->route('GET|POST /interests',
 
                 $activities = implode(" ", $activities);
                 $_SESSION['interests'] = $activities;
-                $f3->reroute('/summary');
             }
+
+            $f3->reroute('/summary');
         }
 
     $template = new Template();

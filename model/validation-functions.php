@@ -6,6 +6,7 @@
  * Time: 17:14
  *
  * http://php.net/manual/en/function.ctype-alpha.php
+ * Shared ideas with Ean
  */
 
 /**
@@ -26,11 +27,18 @@ function validAge($age) {
     return (is_numeric($age) && $age > 18);
 }
 
+/**
+ *
+ * Shared ideas with Ean
+ *
+ * @param $phone
+ * @return bool
+ *
+ */
+function validPhone($phone) {
 
-//function validPhone($phone) {
-
-
-//}
+    return (is_numeric($phone) && (strlen($phone) == 10));
+}
 
 function validIndoor($indoorActivity) {
 

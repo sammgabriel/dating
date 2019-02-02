@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
     <title>My Profile</title>
 </head>
 <body>
@@ -22,10 +24,11 @@
     </select></legend><br><br>
 
     <legend>Seeking</legend>
-    <label><input type="radio" value="male" name="seeking" checked="checked">
-        Male</label><br>
-    <label><input type="radio" value="female" name="seeking" >
-        Female</label><br><br>
+    <label><repeat group="{{ @seeking }}" value="{{ @value }}">
+        <input type="radio" value="{{ @value }}" name="seeking"
+               id="seeking">&nbsp;{{ @value }}<br>
+    </repeat>
+    </label><br><br>
 
     <label>Biography:<br>
         <textarea rows="5" cols="100" name="bio"
