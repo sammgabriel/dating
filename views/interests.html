@@ -8,7 +8,11 @@
 </head>
 <body>
 
-<h1>Interests</h1>
+<nav class="navbar bg-light navbar-light">
+    <p>My Dating Website</p>
+</nav>
+
+<h1 class="mt-4">Interests</h1>
 
 <hr>
 
@@ -18,7 +22,7 @@
     <label>
         <repeat group="{{ @indoor }}" value="{{ @activity }}">
 
-            <check if="{{ isset(@SESSION['indoor']) }}">
+            <!--<check if="{{ isset(@SESSION['indoor']) }}">
                 <true>
                     <br><input type="checkbox" value="{{ @activity }}"
                                name="indoor[]" checked="checked"> {{ @activity }}
@@ -27,7 +31,10 @@
                     <br><input type="checkbox" value="{{ @activity }}"
                                name="indoor[]" > {{ @activity }}
                 </false>
-            </check>
+            </check> -->
+
+            <br><input type="checkbox" value="{{ @activity }}"
+                       name="indoor[]" > {{ @activity }}
 
         </repeat>
 
@@ -41,7 +48,7 @@
     <label>
         <repeat group="{{ @outdoor }}" value="{{ @activity }}">
 
-            <check if="{{ isset(@SESSION['outdoor']) }}">
+            <!-- <check if="{{ isset(@SESSION['outdoor']) }}">
                 <true>
                     <br><input type="checkbox" value="{{ @activity }}"
                                name="outdoor[]" checked="checked"> {{ @activity }}
@@ -50,8 +57,10 @@
                     <br><input type="checkbox" value="{{ @activity }}"
                                name="outdoor[]" > {{ @activity }}
                 </false>
-            </check>
+            </check> -->
 
+            <br><input type="checkbox" value="{{ @activity }}"
+                       name="outdoor[]" > {{ @activity }}
         </repeat>
     </label><br>
     <check if="{{ isset(@errors['outdoor']) }}">

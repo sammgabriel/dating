@@ -1,4 +1,6 @@
-<!-- https://gist.github.com/maxrice/2776900-->
+<!-- https://gist.github.com/maxrice/2776900
+
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,51 +11,78 @@
 </head>
 <body>
 
-<h1>Profile</h1>
+<nav class="navbar bg-light navbar-light">
+    <p>My Dating Website</p>
+</nav>
 
-<form action="#" method="post">
-    <label>Email Address:
-        <input type="text" size="30" maxlength="30"
-               name="email" id="email" value="{{ @SESSION['email'] }}">
-    </label><br><br>
+<div class="container-fluid">
 
-    <legend>State:
-    <select name="state" id="state">
-        <repeat group="{{ @states }}" key="{{ @state }}" value="{{ @value }}">
-            <check if="{{ @value == @stateChoice }}">
-                <true>
-                    <option value="{{ @state }}" selected="selected">{{ @value }}</option><br>
-                </true>
-                <false>
-                    <option value="{{ @state }}">{{ @value }}</option><br>{{ @value }}<br>
-                </false>
-            </check>
+    <h1 class="mt-4">Profile</h1>
 
-        </repeat>
-    </select></legend><br><br>
+    <hr>
 
-    <legend>Seeking</legend>
-    <label><repeat group="{{ @seeking }}" value="{{ @value }}">
-        <check if="{{ @seekingChoice == @value }}">
-            <true>
-                <input type="radio" value="{{ @value }}" name="seeking" checked="checked">
-                {{ @value }}<br>
-            </true>
-            <false>
-                <input type="radio" value="{{ @value }}" name="seeking">
-                {{ @value }}<br>
-            </false>
-        </check>
-    </repeat>
-    </label><br><br>
+    <form action="#" method="post">
 
-    <label>Biography:<br>
-        <textarea rows="5" cols="100" name="bio"
-                  id="bio">{{ @SESSION['bio'] }}</textarea>
-    </label><br><br>
+    <div class="row mb-4">
 
-    <button name="submit">Next</button>
-</form>
+        <div class="col-1"></div>
+
+        <div class="col-5">
+
+            <div class="form-group">
+                <label class="font-weight-bold">Email Address:</label><br>
+                <input type="text" class="form-control" name="email" id="email" value="{{ @SESSION['email'] }}">
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold">State:</label><br>
+                <select name="state" id="state" class="form-control">
+                    <repeat group="{{ @states }}" key="{{ @state }}" value="{{ @value }}">
+                        <check if="{{ @value == @stateChoice }}">
+                            <true>
+                                <option value="{{ @state }}" selected="selected">{{ @value }}</option><br>
+                            </true>
+                            <false>
+                                <option value="{{ @state }}">{{ @value }}</option><br>{{ @value }}<br>
+                            </false>
+                        </check>
+                    </repeat>
+                </select>
+            </div>
+            <div class="form-group form-check">
+                <label class="font-weight-bold">Seeking: </label><br>
+                <repeat group="{{ @seeking }}" value="{{ @value }}">
+                    <check if="{{ @seekingChoice == @value }}">
+                        <true>
+                            <input type="radio" value="{{ @value }}" name="seeking" checked="checked">
+                            <label class="ml-2 mr-4">{{ @value }}</label>
+                        </true>
+                        <false>
+                            <input type="radio" value="{{ @value }}" name="seeking">
+                            <label class="ml-2 mr-4">{{ @value }}</label>
+                        </false>
+                    </check>
+                </repeat>
+            </div>
+
+        </div>
+
+        <div class="col-5">
+
+            <div class="form-group">
+                <label class="font-weight-bold">Biography:</label><br>
+                <textarea class="form-control" name="bio" id="bio" rows="3">{{ @SESSION['bio'] }}</textarea>
+            </div>
+            <br><br>
+
+            <button class="btn btn-primary float-right" name="submit">Next ></button>
+
+        </div>
+
+    </div>
+
+    </form>
+
+</div>
 
 </body>
 </html>

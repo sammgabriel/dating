@@ -12,7 +12,7 @@
 <body>
 
 <nav class="navbar bg-light navbar-light">
-    <p>Dating Website</p>
+    <p>My Dating Website</p>
 </nav>
 
 <div class="container-fluid">
@@ -21,79 +21,79 @@
 
     <hr>
 
+    <form action="#" method="post" class="mt-4">
+
     <div class="row mb-4">
-
-
         <div class="col-1"></div>
-
-
-        <div class="col-6 ">
-
-
-            <form action="#" method="post" class="mt-4">
-                <div class="form-group">
-                    <label class="font-weight-bold">First Name:</label><br>
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="fname" id="fname" value="{{ @SESSION['fname'] }}">
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-address-card"></i></span>
-                        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label class="font-weight-bold">First Name:</label><br>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="fname" id="fname" value="{{ @SESSION['fname'] }}">
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="fas fa-address-card"></i></span>
                     </div>
-                    <check if="{{ isset(@errors['fname']) }}">
-                        <p>{{ @errors['fname']}}</p>
+                </div>
+                <check if="{{ isset(@errors['fname']) }}">
+                    <p>{{ @errors['fname']}}</p>
+                </check>
+            </div>
+
+            <div class="form-group">
+                <label class="font-weight-bold">Last Name:</label><br>
+                <input type="text" class="form-control" name="lname" id="lname" value="{{ @SESSION['lname'] }}">
+                <check if="{{ isset(@errors['lname']) }}">
+                    <p>{{ @errors['lname']}}</p>
+                </check>
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold">Age:</label><br>
+                <input type="text" class="form-control" name="age" id="age" value="{{ @SESSION['age'] }}">
+                <check if="{{ isset(@errors['age']) }}">
+                    <p>{{ @errors['age']}}</p>
+                </check>
+            </div>
+            <div class="form-group form-check">
+                <label class="font-weight-bold">Gender:</label><br>
+                <repeat group="{{ @gender }}" value="{{ @value }}">
+
+                    <check if="{{ @genderChoice == @value }}">
+                        <true>
+                            <input class="form-check-input" type="radio" value="{{ @value }}" name="gender" checked="checked">
+                            <label class="form-check-label ml-2 mr-4">
+                                 {{ @value }}</label>
+                        </true>
+                        <false>
+
+                            <input class="form-check-input" type="radio" value="{{ @value }}" name="gender">
+                            <label class="form-check-label ml-2 mr-4">
+                                {{ @value }}</label>
+                        </false>
                     </check>
-                </div>
-
-                <div class="form-group">
-                    <label class="font-weight-bold">Last Name:</label><br>
-                    <input type="text" class="form-control" name="lname" id="lname" value="{{ @SESSION['lname'] }}">
-                    <check if="{{ isset(@errors['lname']) }}">
-                        <p>{{ @errors['lname']}}</p>
-                    </check>
-                </div>
-                <div class="form-group">
-                    <label class="font-weight-bold">Age:</label><br>
-                    <input type="text" class="form-control" name="age" id="age" value="{{ @SESSION['age'] }}">
-                    <check if="{{ isset(@errors['age']) }}">
-                        <p>{{ @errors['age']}}</p>
-                    </check>
-                </div>
-                <div class="form-group form-check">
-                    <label class="font-weight-bold">Gender:</label><br>
-                    <repeat group="{{ @gender }}" value="{{ @value }}">
-
-                        <check if="{{ @genderChoice == @value }}">
-                            <true>
-                                <input type="radio" value="{{ @value }}" name="gender" checked="checked" class="mr-2">
-                                {{ @value }}&nbsp&nbsp
-                            </true>
-                            <false>
-
-                                <input type="radio" value="{{ @value }}" name="gender" class="mr-2">
-                                {{ @value }} &nbsp&nbsp
-                            </false>
-                        </check>
-
-                    </repeat>
-                </div>
-                <div class="form-group">
-                    <label class="font-weight-bold">Phone Number: </label><br>
-                    <input type="text" class="form-control" name="phone" id="phone" value="{{ @SESSION['phone'] }}" placeholder="5551234567">
-                    <check if="{{ isset(@errors['phone']) }}">
-                        <p>{{ @errors['phone']}}</p>
-                    </check>
-                </div>
-
-                <button class="btn btn-primary float-right mt-3" name="submit">Next ></button>
-            </form>
+                </repeat>
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold">Phone Number: </label><br>
+                <input type="text" class="form-control" name="phone" id="phone" value="{{ @SESSION['phone'] }}" placeholder="5551234567">
+                <check if="{{ isset(@errors['phone']) }}">
+                    <p>{{ @errors['phone']}}</p>
+                </check>
+            </div>
         </div>
-
-        <div class="col-4 top">
+        <div class="col-4">
             <p class="alert alert-secondary">Note: All information entered is protected by our
                 <a href="#">privacy policy</a>. Profile information can only be viewed by others with
                 your permission.</p><br>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-11">
+            <button class="btn btn-primary float-right" name="submit">Next ></button>
+        </div>
+    </div>
+
+    </form>
 </div>
 
 </body>
