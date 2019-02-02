@@ -1,3 +1,4 @@
+<!-- https://gist.github.com/maxrice/2776900-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,26 +14,42 @@
 <form action="#" method="post">
     <label>Email Address:
         <input type="text" size="30" maxlength="30"
-               name="email" id="email">
+               name="email" id="email" value="{{ @SESSION['email'] }}">
     </label><br><br>
 
-    <legend>State
+    <legend>State:
     <select name="state" id="state">
         <repeat group="{{ @states }}" key="{{ @state }}" value="{{ @value }}">
-            <option value="{{ @state }}">{{ @value }}</option>
+            <check if="{{ @value == @stateChoice }}">
+                <true>
+                    <option value="{{ @state }}" selected="selected">{{ @value }}</option><br>
+                </true>
+                <false>
+                    <option value="{{ @state }}">{{ @value }}</option><br>{{ @value }}<br>
+                </false>
+            </check>
+
         </repeat>
     </select></legend><br><br>
 
     <legend>Seeking</legend>
     <label><repeat group="{{ @seeking }}" value="{{ @value }}">
-        <input type="radio" value="{{ @value }}" name="seeking"
-               id="seeking">&nbsp;{{ @value }}<br>
+        <check if="{{ @seekingChoice == @value }}">
+            <true>
+                <input type="radio" value="{{ @value }}" name="seeking" checked="checked">
+                {{ @value }}<br>
+            </true>
+            <false>
+                <input type="radio" value="{{ @value }}" name="seeking">
+                {{ @value }}<br>
+            </false>
+        </check>
     </repeat>
     </label><br><br>
 
     <label>Biography:<br>
         <textarea rows="5" cols="100" name="bio"
-                  id="bio">Enter a biography</textarea>
+                  id="bio">{{ @SESSION['bio'] }}</textarea>
     </label><br><br>
 
     <button name="submit">Next</button>

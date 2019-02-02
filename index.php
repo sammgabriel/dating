@@ -55,6 +55,8 @@ $f3->route('GET|POST /personal-information',
         $gender = $_POST['gender'];
         $_SESSION['gender'] = $gender;
 
+        $f3->set('genderChoice', $_POST['gender']);
+
 
         if (isset($_POST['fname'])) {
 
@@ -126,23 +128,64 @@ $f3->route('GET|POST /profile',
     function($f3){
 
     $f3->set('seeking', array("Male", "Female"));
+    $f3->set('seekingChoice', $_POST['seeking']);
 
-    $f3->set('states', array("Washington" => "WASHINGTON", "Oregon" => "OREGON", "California" => "CALIFORNIA", 'Alabama' => 'ALABAMA',
-        "Nevada"=>"NEVADA", "Idaho"=>"IDAHO", "Utah"=>"UTAH",
-        "Arizona"=>"ARIZONA", "Alaska"=>"ALASKA", "Hawaii"=>"HAWAII", "Montana"=>"MONTANA",
-        "Wyoming"=>"WYOMING", "Colorado"=>"COLORADO", "New Mexico"=>"NEW MEXICO",
-        "North Dakota"=>"NORTH DAKOTA", "South Dakota"=>"SOUTH DAKOTA", "Nebraska"=>"NEBRASKA",
-        "Kansas"=>"KANSAS", "Oklahoma"=>"OKLAHOMA", "Texas"=>"TEXAS", "Minnesota"=>"MINNESOTA",
-        "Iowa"=>"IOWA", "Missouri"=>"MISSOURI", "Arkansas"=>"ARKANSAS", "Louisiana"=>"LOUISIANA",
-        "Wisconsin"=>"WISCONSIN", "Illinois"=>"ILLINOIS", "Mississippi"=>"MISSISSIPPI",
-        "Michigan"=>"MICHIGAN", "Indiana"=>"INDIANA", "Kentucky"=>"KENTUCKY",
-        "Tennessee"=>"TENNESSEE", "Ohio"=>"OHIO", "West Virginia"=>"WEST VIRGINIA",
-        "Virginia"=>"VIRGINIA", "North Carolina"=>"NORTH CAROLINA", "South Carolina"=>"SOUTH CAROLINA",
-        "Georgia"=>"GEORGIA", "Florida"=>"FLORIDA", "Maine"=>"MAINE", "New Hampshire"=>"NEW HAMPSHIRE",
-        "Vermont"=>"VERMONT", "Massachusetts"=>"MASSACHUSETTS", "New York"=>"NEW YORK",
-        "Pennsylvania"=>"PENNSYLVANIA", "Rhode Island"=>"RHODE ISLAND", "Connecticut"=>"CONNECTICUT",
-        "New Jersey"=>"NEW JERSEY", "Delaware"=>"DELAWARE", "Maryland"=>"MARYLAND",
-        "Washington DC"=>"WASHINGTON D.C."));
+    $f3->set('states', array(
+
+        'Alabama' => 'ALABAMA',
+        "Alaska"=>"ALASKA",
+        "Arizona"=>"ARIZONA",
+        "Arkansas"=>"ARKANSAS",
+        "California" => "CALIFORNIA",
+        "Colorado"=>"COLORADO",
+        "Connecticut"=>"CONNECTICUT",
+        "Delaware"=>"DELAWARE",
+        "Washington DC"=>"DISTRICT OF COLUMBIA",
+        "Florida"=>"FLORIDA",
+        "Georgia"=>"GEORGIA",
+        "Hawaii"=>"HAWAII",
+        "Idaho"=>"IDAHO",
+        "Illinois"=>"ILLINOIS",
+        "Indiana"=>"INDIANA",
+        "Iowa"=>"IOWA",
+        "Kansas"=>"KANSAS",
+        "Kentucky"=>"KENTUCKY",
+        "Louisiana"=>"LOUISIANA",
+        "Maine"=>"MAINE",
+        "Maryland"=>"MARYLAND",
+        "Massachusetts"=>"MASSACHUSETTS",
+        "Michigan"=>"MICHIGAN",
+        "Minnesota"=>"MINNESOTA",
+        "Mississippi"=>"MISSISSIPPI",
+        "Missouri"=>"MISSOURI",
+        "Montana"=>"MONTANA",
+        "Nebraska"=>"NEBRASKA",
+        "Nevada"=>"NEVADA",
+        "New Hampshire"=>"NEW HAMPSHIRE",
+        "New Jersey"=>"NEW JERSEY",
+        "New Mexico"=>"NEW MEXICO",
+        "New York"=>"NEW YORK",
+        "North Carolina"=>"NORTH CAROLINA",
+        "North Dakota"=>"NORTH DAKOTA",
+        "Ohio"=>"OHIO",
+        "Oklahoma"=>"OKLAHOMA",
+        "Oregon" => "OREGON",
+        "Pennsylvania"=>"PENNSYLVANIA",
+        "Rhode Island"=>"RHODE ISLAND",
+        "South Carolina"=>"SOUTH CAROLINA",
+        "South Dakota"=>"SOUTH DAKOTA",
+        "Tennessee"=>"TENNESSEE",
+        "Texas"=>"TEXAS",
+        "Utah"=>"UTAH",
+        "Vermont"=>"VERMONT",
+        "Virginia"=>"VIRGINIA",
+        "Washington" => "WASHINGTON",
+        "West Virginia"=>"WEST VIRGINIA",
+        "Wisconsin"=>"WISCONSIN",
+        "Wyoming"=>"WYOMING",
+    ));
+
+    $f3->set('stateChoice', $_POST['state']);
 
     if (isset($_POST['submit'])) {
 
@@ -176,6 +219,8 @@ $f3->route('GET|POST /interests',
 
         $outdoorHobbies = $_POST['outdoor'];
         $indoorHobbies = $_POST['indoor'];
+        $f3->set('indoorHobbies', $indoorHobbies);
+        $f3->set('outdoorHobbies', $outdoorHobbies);
         $hobby = null;
         $activity = null;
         $activities = [];
@@ -183,7 +228,6 @@ $f3->route('GET|POST /interests',
         if (isset($_POST['submit'])) {
 
             if (isset($_POST['indoor'])) {
-
 
                 foreach ($indoorHobbies as $hobby) {
 
@@ -198,6 +242,7 @@ $f3->route('GET|POST /interests',
                     }
                 }
             }
+
 
             if (isset($_POST['outdoor'])) {
 
@@ -219,9 +264,14 @@ $f3->route('GET|POST /interests',
 
                 $activities = implode(" ", $activities);
                 $_SESSION['interests'] = $activities;
+                $f3->reroute('/summary');
             }
 
-            $f3->reroute('/summary');
+            if (!isset($_POST['indoor']) && !isset($_POST['outdoor'])) {
+
+                $f3->reroute('/summary');
+            }
+
         }
 
     $template = new Template();

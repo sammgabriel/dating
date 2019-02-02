@@ -36,8 +36,19 @@
 
     <legend>Gender</legend>
     <label><repeat group="{{ @gender }}" value="{{ @value }}">
-        <input type="radio" value="{{ @value }}" name="gender"
-                      id="gender">&nbsp;{{ @value }}<br>
+
+        <check if="{{ @genderChoice == @value }}">
+            <true>
+                <input type="radio" value="{{ @value }}" name="gender" checked="checked">
+                {{ @value }}<br>
+            </true>
+            <false>
+
+                <input type="radio" value="{{ @value }}" name="gender">
+                {{ @value }}<br>
+            </false>
+        </check>
+
     </repeat>
     </label>
 

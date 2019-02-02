@@ -17,8 +17,17 @@
     <legend>Indoor Interests</legend>
     <label>
         <repeat group="{{ @indoor }}" value="{{ @activity }}">
-            <br><input type="checkbox" value="{{ @activity }}"
-                   name="indoor[]"> {{ @activity }}
+            <check if="{{ @activity == indoorHobbies }}">
+                <true>
+                    <br><input type="checkbox" value="{{ @activity }}"
+                               name="indoor[]" checked="checked"> {{ @activity }}
+                </true>
+                <false>
+                    <br><input type="checkbox" value="{{ @activity }}"
+                               name="indoor[]"> {{ @activity }}
+                </false>
+            </check>
+
         </repeat>
 
     </label>

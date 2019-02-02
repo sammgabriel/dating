@@ -40,12 +40,20 @@ function validPhone($phone) {
     return (is_numeric($phone) && (strlen($phone) == 10));
 }
 
+/**
+ * @param $indoorActivity
+ * @return bool
+ */
 function validIndoor($indoorActivity) {
 
     global $f3;
     return in_array($indoorActivity, $f3->get('indoor'));
 }
 
+/**
+ * @param $outdoorActivity
+ * @return bool
+ */
 function validOutdoor($outdoorActivity) {
 
     global $f3;
