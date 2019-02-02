@@ -106,8 +106,7 @@ $f3->route('GET|POST /personal-information',
 
             } else {
 
-                $f3->set("errors['phone']", "Please enter a valid phone number with 
-                    no characters (i.e. 5551234567).");
+                $f3->set("errors['phone']", "Please enter a valid phone number.");
             }
         }
 
@@ -219,8 +218,7 @@ $f3->route('GET|POST /interests',
 
         $outdoorHobbies = $_POST['outdoor'];
         $indoorHobbies = $_POST['indoor'];
-        $f3->set('indoorHobbies', $indoorHobbies);
-        $f3->set('outdoorHobbies', $outdoorHobbies);
+        $f3->set('indoorHobbies', $_POST['indoor']);
         $hobby = null;
         $activity = null;
         $activities = [];
@@ -241,6 +239,7 @@ $f3->route('GET|POST /interests',
                         $f3->set("errors['indoor']", "Please pick a valid indoor activity.");
                     }
                 }
+
             }
 
 
@@ -262,8 +261,8 @@ $f3->route('GET|POST /interests',
 
             if (validIndoor($hobby) && validOutdoor($activity)) {
 
-                $activities = implode(" ", $activities);
-                $_SESSION['interests'] = $activities;
+                $_SESSION['indoor'] = $_POST['indoor'];
+                $_SESSION['outdoor'] = $_POST['outdoor'];
                 $f3->reroute('/summary');
             }
 

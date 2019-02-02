@@ -15,15 +15,13 @@
     <p>Email: {{ @SESSION['email'] }}</p>
     <p>State: {{ @SESSION['state'] }}</p>
     <p>Seeking: {{ @SESSION['seeking'] }}</p>
-    <p>Interests: {{ @SESSION['interests'] }}
-        <!-- <repeat group="{{ @indoor }}" value="{{ @activity }}">
-            <br><input type="checkbox" value="{{ @activity }}"
-                       name="indoor[]">{{ @activity }}
+    <p>Interests:
+        <repeat group="{{ @SESSION['indoor'] }}" value="{{ @activity }}">
+            {{ @activity }}
         </repeat>
-        <repeat group="{{ @indoor }}" value="{{ @activity }}">
-            <br><input type="checkbox" value="{{ @activity }}"
-                       name="indoor[]"> {{ @activity }}
-        </repeat> -->
+        <repeat group="{{ @SESSION['outdoor'] }}" value="{{ @hobby }}">
+            {{ @hobby }}
+        </repeat>
     </p>
     <p>Bio: {{ @SESSION['bio'] }}</p>
 

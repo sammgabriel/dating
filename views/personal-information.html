@@ -8,66 +8,94 @@
 </head>
 <body>
 
-<h1>Personal Information</h1>
+<nav class="navbar bg-light navbar-light">
 
-<form action="#" method="post">
-    <label>First Name:
-        <input type="text" size="20" maxlength="20"
-               name="fname" id="fname" value="{{ @SESSION['fname'] }}">
-    </label><br>
-    <check if="{{ isset(@errors['fname']) }}">
-        <p>{{ @errors['fname']}}</p>
-    </check><br><br>
-    <label>Last Name:
-        <input type="text" size="20" maxlength="20"
-               name="lname" id="lname" value="{{ @SESSION['lname'] }}">
-    </label><br>
-    <check if="{{ isset(@errors['lname']) }}">
-        <p>{{ @errors['lname']}}</p>
-    </check><br><br>
+    <p>Dating Website</p>
 
-    <label>Age:
-        <input type="text" size="20" maxlength="20"
-               name="age" id="age" value="{{ @SESSION['age'] }}">
-    </label><br>
-    <check if="{{ isset(@errors['age']) }}">
-        <p>{{ @errors['age']}}</p>
-    </check><br><br>
+</nav>
 
-    <legend>Gender</legend>
-    <label><repeat group="{{ @gender }}" value="{{ @value }}">
+<div class="container-fluid">
+    <div class="row mt-4 mb-4">
 
-        <check if="{{ @genderChoice == @value }}">
-            <true>
-                <input type="radio" value="{{ @value }}" name="gender" checked="checked">
-                {{ @value }}<br>
-            </true>
-            <false>
-
-                <input type="radio" value="{{ @value }}" name="gender">
-                {{ @value }}<br>
-            </false>
-        </check>
-
-    </repeat>
-    </label>
+        <div class="col-1"></div>
 
 
-    <br><br>
+        <div class="col-6 ">
 
-    <label>Phone Number (i.e. 5551234567):
-        <input type="text" size="20" maxlength="20"
-               name="phone" id="phone" value="{{ @SESSION['phone'] }}">
-    </label><br>
-    <check if="{{ isset(@errors['phone']) }}">
-        <p>{{ @errors['phone']}}</p>
-    </check><br><br>
+            <h1>Personal Information</h1>
 
-    <p>Note: All information entered is protected by our privacy policy. Profile information
-        can only be viewed by others with your permission.</p><br>
+            <form action="#" method="post" class="mt-4">
+                <div class="form-group">
+                    <label class="font-weight-bold">First Name:</label><br>
+                    <input type="text" class="form-control" name="fname" id="fname" value="{{ @SESSION['fname'] }}">
+                    <check if="{{ isset(@errors['fname']) }}">
+                        <p>{{ @errors['fname']}}</p>
+                    </check>
+                </div>
 
-    <button name="submit">Next</button>
-</form>
+                <div class="form-group">
+                    <label class="font-weight-bold">Last Name:</label><br>
+                    <input type="text" class="form-control" name="lname" id="lname" value="{{ @SESSION['lname'] }}">
+                    <check if="{{ isset(@errors['lname']) }}">
+                        <p>{{ @errors['lname']}}</p>
+                    </check>
+                </div>
+                <div class="form-group">
+                    <label class="font-weight-bold">Age:</label><br>
+                    <input type="text" class="form-control" name="age" id="age" value="{{ @SESSION['age'] }}">
+                    <check if="{{ isset(@errors['age']) }}">
+                        <p>{{ @errors['age']}}</p>
+                    </check>
+                </div>
+                <div class="form-group form-check">
+                    <label class="font-weight-bold">Gender:</label><br>
+                    <repeat group="{{ @gender }}" value="{{ @value }}">
+
+                        <check if="{{ @genderChoice == @value }}">
+                            <true>
+                                <input type="radio" value="{{ @value }}" name="gender" checked="checked" class="mr-2">
+                                {{ @value }}&nbsp&nbsp
+                            </true>
+                            <false>
+
+                                <input type="radio" value="{{ @value }}" name="gender" class="mr-2">
+                                {{ @value }} &nbsp&nbsp
+                            </false>
+                        </check>
+
+                    </repeat>
+                </div>
+                <div class="form-group">
+                    <label class="font-weight-bold">Phone Number: </label><br>
+                    <input type="text" class="form-control" name="phone" id="phone" value="{{ @SESSION['phone'] }}" placeholder="5551234567">
+                    <check if="{{ isset(@errors['phone']) }}">
+                        <p>{{ @errors['phone']}}</p>
+                    </check>
+                </div>
+
+                <button class="btn btn-primary mt-3" name="submit">Next ></button>
+            </form>
+        </div>
+
+        <div class="col-4 top">
+            <p class="alert alert-secondary">Note: All information entered is protected by our
+                <a href="#">privacy policy</a>. Profile information can only be viewed by others with
+                your permission.</p><br>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>

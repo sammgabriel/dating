@@ -17,14 +17,15 @@
     <legend>Indoor Interests</legend>
     <label>
         <repeat group="{{ @indoor }}" value="{{ @activity }}">
-            <check if="{{ @activity == indoorHobbies }}">
+
+            <check if="{{ isset(@SESSION['indoor]) }}">
                 <true>
                     <br><input type="checkbox" value="{{ @activity }}"
                                name="indoor[]" checked="checked"> {{ @activity }}
                 </true>
                 <false>
                     <br><input type="checkbox" value="{{ @activity }}"
-                               name="indoor[]"> {{ @activity }}
+                               name="indoor[]" > {{ @activity }}
                 </false>
             </check>
 
@@ -39,8 +40,18 @@
     <legend>Outdoor Interests</legend>
     <label>
         <repeat group="{{ @outdoor }}" value="{{ @activity }}">
-            <br><input type="checkbox" value="{{ @activity }}"
-                       name="outdoor[]"> {{ @activity }}
+
+            <check if="{{ isset(@SESSION['outdoor]) }}">
+                <true>
+                    <br><input type="checkbox" value="{{ @activity }}"
+                               name="outdoor[]" checked="checked"> {{ @activity }}
+                </true>
+                <false>
+                    <br><input type="checkbox" value="{{ @activity }}"
+                               name="outdoor[]" > {{ @activity }}
+                </false>
+            </check>
+
         </repeat>
     </label><br>
     <check if="{{ isset(@errors['outdoor']) }}">
