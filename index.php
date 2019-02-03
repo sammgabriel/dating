@@ -227,6 +227,10 @@ $f3->route('GET|POST /interests',
 
     function($f3){
 
+        // session variables
+        $_SESSION['indoor'] = array();
+        $_SESSION['outdoor'] = array();
+
         // arrays
         $indoor = array("tv", "puzzles", "movies", "reading",
             "cooking", "playing cards", "board games",
@@ -243,14 +247,9 @@ $f3->route('GET|POST /interests',
         $outdoorHobbies = $_POST['outdoor'];
         $indoorHobbies = $_POST['indoor'];
 
-        // session variables
-        //$_SESSION['indoor'] = $_POST['indoor'];
-        //$_SESSION['outdoor'] = $_POST['outdoor'];
-
         // variables
         $hobby = "";
         $activity = "";
-        $activities = [];
 
         // when the user submits the form
         if (isset($_POST['submit'])) {
@@ -264,7 +263,7 @@ $f3->route('GET|POST /interests',
                     if (validIndoor($hobby)) {
 
                         $_SESSION['indoor'] = $_POST['indoor'];
-                        array_push($activities, $hobby);
+                        //array_push($_SESSION['indoor'], $hobby);
 
                     } else {
 
@@ -272,6 +271,7 @@ $f3->route('GET|POST /interests',
                         $f3->set("errors['indoor']", "Please pick a valid indoor activity.");
                     }
                 }
+
             }
 
             // if the user picks outdoor interests
@@ -283,7 +283,7 @@ $f3->route('GET|POST /interests',
                     if (validOutdoor($activity)) {
 
                         $_SESSION['outdoor'] = $_POST['outdoor'];
-                        array_push($activities, $activity);
+                        //array_push($_SESSION['outdoor'], $hobby);
 
                     } else {
 
@@ -291,6 +291,7 @@ $f3->route('GET|POST /interests',
                         $f3->set("errors['outdoor']", "Please pick a valid outdoor activity.");
                     }
                 }
+
             }
 
             // if all entries are valid, redirect the user to the next page
