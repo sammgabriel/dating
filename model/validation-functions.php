@@ -1,17 +1,28 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: sammgabriel
- * Date: 2019-01-31
- * Time: 17:14
+ *
+ * Author Name: Samantha Gabriel
+ * Date: February 2, 2019
+ * File Name: validation-functions.php
+ *
+ * References:
  *
  * http://php.net/manual/en/function.ctype-alpha.php
  * Shared ideas with Ean
+ *
  */
 
 /**
+ *
+ * Validates name
+ * Checks if the entry is alphabetic
+ *
+ * Referred to the PHP documentation to determine how to validate
+ * if an entry is alphabetic
+ *
  * @param $name
  * @return bool
+ *
  */
 function validName($name) {
 
@@ -19,8 +30,13 @@ function validName($name) {
 }
 
 /**
+ *
+ * Validates age
+ * Checks if the entry is numeric and over 18
+ *
  * @param $age
  * @return bool
+ *
  */
 function validAge($age) {
 
@@ -29,7 +45,9 @@ function validAge($age) {
 
 /**
  *
- * Shared ideas with Ean
+ * Validates phone number
+ *
+ * Shared ideas with Ean regarding how to accomplish this
  *
  * @param $phone
  * @return bool
@@ -41,8 +59,13 @@ function validPhone($phone) {
 }
 
 /**
+ *
+ * Validates indoor interests options
+ * Checks for spoofing
+ *
  * @param $indoorActivity
  * @return bool
+ *
  */
 function validIndoor($indoorActivity) {
 
@@ -51,8 +74,13 @@ function validIndoor($indoorActivity) {
 }
 
 /**
+ *
+ * Validates indoor interests options
+ * Checks for spoofing
+ *
  * @param $outdoorActivity
  * @return bool
+ *
  */
 function validOutdoor($outdoorActivity) {
 

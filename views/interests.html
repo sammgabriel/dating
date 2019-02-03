@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--
+
+       Author Name: Samantha Gabriel
+       Date: February 2, 2019
+       File Name: interests.html
+
+       This is the interests page for the Dating Website
+       registration process.
+
+       References:
+
+       https://getbootstrap.com/docs/4.2/getting-started/introduction/
+       Shared ideas with Jake
+
+    -->
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
@@ -8,62 +23,77 @@
 </head>
 <body>
 
+<!-- Navigation -->
 <nav class="navbar bg-light navbar-light">
     <p>My Dating Website</p>
 </nav>
 
-<div class="container">
+<div class="container-fluid">
 
+    <!-- Page header -->
     <h1 class="mt-4">Interests</h1>
 
     <hr>
 
+    <!-- Interests form -->
+    <!-- Shared ideas with Jake regarding how to format
+            the checkboxes and how to make them sticky -->
     <form action="#" method="post">
 
     <div class="row">
-
         <div class="col-1"></div>
 
         <div class="col-10">
+            <!-- Indoor interests options -->
             <label class="font-weight-bold mb-3">Indoor Interests</label><br>
             <div class="form-check form-check-inline flex-wrap">
+                <!-- Loops through the array of indoor interests and
+                    displays each one -->
                 <repeat group="{{ @indoor }}" value="{{ @activity }}">
                     <div class="col-3">
-                        <input class="form-check-input checkbox-inline" type="checkbox" value="{{ @activity }}" name="indoor[]">
+                        <!-- Makes checkboxes sticky -->
+                        <input class="form-check-input" type="checkbox" value="{{ @activity }}" name="indoor[]"
+                        <check if="{{ in_array(@activity, @SESSION['indoor'])}}">checked='checked'</check>>
                         <label class="form-check-label mr-3">{{ @activity }}</label>
                     </div>
                 </repeat>
             </div><br><br>
+            <!-- Field validation error -->
             <check if="{{ isset(@errors['indoor']) }}">
                 <p>{{ @errors['indoor']}}</p>
             </check>
+            <br><br>
         </div>
-
     </div>
 
     <div class="row">
-
         <div class="col-1"></div>
 
-        <div class="col-10">
-            <label class="font-weight-bold">Outdoor Interests</label><br>
+        <div class="col-11">
+            <!-- Outdoor interests options -->
+            <label class="font-weight-bold mb-3">Outdoor Interests</label><br>
             <div class="form-check form-check-inline flex-wrap">
+                <!-- Loops through the array of indoor interests and
+                    displays each one -->
                 <repeat group="{{ @outdoor }}" value="{{ @activity }}">
                     <div class="col-3">
-                        <input class="form-check-input" type="checkbox" value="{{ @activity }}" name="outdoor[]">
+                        <!-- Makes checkboxes sticky -->
+                        <input class="form-check-input" type="checkbox" value="{{ @activity }}" name="outdoor[]"
+                        <check if="{{ in_array(@activity, @SESSION['outdoor'])}}">checked</check>>
                         <label class="form-check-label mr-3">{{ @activity }}</label>
                     </div>
                 </repeat>
             </div><br><br>
+            <!-- Field validation error -->
             <check if="{{ isset(@errors['outdoor']) }}">
                 <p>{{ @errors['outdoor']}}</p>
             </check>
         </div>
-
     </div>
 
     <div class="row">
-        <div class="col-11">
+        <!-- Submit button -->
+        <div class="col-11 mt-4">
             <button class="btn btn-primary float-right mb-4" name="submit">Next ></button>
         </div>
     </div>

@@ -1,7 +1,19 @@
-<!-- Greasemann [CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)], from Wikimedia Commons -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--
+
+       Author Name: Samantha Gabriel
+       Date: February 2, 2019
+       File Name: summary.html
+
+       This is the profile summary page for the Dating Website
+
+       References:
+
+       Greasemann [CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)], from Wikimedia Commons
+
+    -->
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
@@ -10,10 +22,9 @@
 </head>
 <body>
 
+<!-- Navigation -->
 <nav class="navbar bg-light navbar-light">
-
     <p>My Dating Website</p>
-
 </nav>
 
 <div class="container-fluid">
@@ -21,11 +32,9 @@
 
         <div class="col-1"></div>
 
-
+        <!-- Displays a summary of the user's entries -->
         <div class="col-5">
-
             <ul class="list-group">
-
                 <li class="list-group-item">Name: {{ @SESSION['fname'] }} {{ @SESSION['lname'] }}</li>
                 <li class="list-group-item">Gender: {{ @SESSION['gender'] }}</li>
                 <li class="list-group-item">Phone Number: {{ @SESSION['phone'] }}</li>
@@ -44,12 +53,14 @@
         </div>
 
         <div class="col-4 text-center">
+            <!-- Default avatar and user biography -->
             <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="avatar" id="avatar">
             <p class="text-left mt-4">Biography: {{ @SESSION['bio'] }}</p>
-
         </div>
     </div>
+
     <div class="row justify-content-center">
+        <!-- Contact button -->
         <button class="btn btn-primary btn-lg" name="submit">Contact Me!</button>
     </div>
 </div>
