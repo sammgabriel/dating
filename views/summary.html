@@ -41,14 +41,16 @@
                 <li class="list-group-item">Email: {{ @SESSION['email'] }}</li>
                 <li class="list-group-item">State: {{ @SESSION['state'] }}</li>
                 <li class="list-group-item">Seeking: {{ @SESSION['seeking'] }}</li>
-                <li class="list-group-item">Interests:
-                    <repeat group="{{ @SESSION['indoor'] }}" value="{{ @activity }}">
-                        {{ @activity }}
-                    </repeat>
-                    <repeat group="{{ @SESSION['outdoor'] }}" value="{{ @hobby }}">
-                        {{ @hobby }}
-                    </repeat>
-                </li>
+                <check if="{{ isset(@SESSION['premium']) }}">
+                    <li class="list-group-item">Interests:
+                        <repeat group="{{ @SESSION['indoor'] }}" value="{{ @activity }}">
+                            {{ @activity }}
+                        </repeat>
+                        <repeat group="{{ @SESSION['outdoor'] }}" value="{{ @hobby }}">
+                            {{ @hobby }}
+                        </repeat>
+                    </li>
+                </check>
             </ul>
         </div>
 
