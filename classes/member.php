@@ -55,14 +55,63 @@ class Member {
         $this->_age = $age;
     }
 
-    function getLastName() {
+    function getGender() {
 
-        return $this->_lname;
+        return $this->_gender;
     }
 
-    function setLastName($lname) {
+    function setGender($gender) {
 
-        $this->_lname = $lname;
+        $this->_gender = $gender;
     }
 
+    function getPhone() {
+
+        return $this->_phone;
+    }
+
+    function setPhone($phone) {
+
+        $this->_phone = $phone;
+    }
+
+    function getEmail() {
+
+        return $this->_email;
+    }
+
+    function setEmail($email) {
+
+        $this->_email = $email;
+    }
+
+    function getState() {
+
+        return $this->_state;
+    }
+
+    function setState($state) {
+
+        $this->_state = $state;
+    }
+
+    function getSeeking() {
+
+        return $this->_seeking;
+    }
+
+    function setSeeking($seeking) {
+
+        $this->_seeking = $seeking;
+    }
+
+    function getBio() {
+
+        return $this->_bio;
+    }
+
+    function setBio($bio) {
+
+        $this->_bio = $bio;
+    }
 }
