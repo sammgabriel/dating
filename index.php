@@ -11,6 +11,7 @@
  *
  * Shared ideas with Jake
  * https://gist.github.com/maxrice/2776900
+ * https://stackoverflow.com/questions/5514961/using-session-variable-with-objects
  *
  */
 
@@ -139,10 +140,21 @@ $f3->route('GET|POST /personal-information',
             }
         }
 
+        // Create session variable for premium membership if it has been selected
         if (isset($_POST['premium']))
         {
 
             $_SESSION['premium'] = $_POST['premium'];
+            $premiumMember = new PremiumMember($_SESSION['fname'], $_SESSION['lname'], $_SESSION['age'],
+                $_SESSION['gender'], $_SESSION['phone']);
+            $_SESSION['premiumMember'] = $premiumMember;
+        }
+        // otherwise create a session variable for a standard membership
+        else
+        {
+            $member = new Member($_SESSION['fname'], $_SESSION['lname'], $_SESSION['age'],
+                $_SESSION['gender'], $_SESSION['phone']);
+            $_SESSION['member'] = $member;
         }
 
         // Redirects the user to the next page if all entries are valid
@@ -236,13 +248,30 @@ $f3->route('GET|POST /profile',
         $_SESSION['seeking'] = $_POST['seeking'];
         $_SESSION['bio'] = $_POST['bio'];
 
+        // If premium membership has been selected,
+        // reroute to the interests page. Otherwise, reroute
+        // to summary page.
+        // Referred to Stack Overflow regarding how to retrieve
+        // an object from a session
         if (isset($_SESSION['premium']))
         {
 
+            $premiumMember = $_SESSION['premiumMember'];
+            $premiumMember->setEmail($_SESSION['email']);
+            $premiumMember->setState($_SESSION['state']);
+            $premiumMember->setSeeking($_SESSION['seeking']);
+            $premiumMember->setBio($_SESSION['bio']);
+            $_SESSION['premiumMember'] = $premiumMember;
             $f3->reroute('/interests');
         }
         else
         {
+            $member = $_SESSION['member'];
+            $member->setEmail($_SESSION['email']);
+            $member->setState($_SESSION['state']);
+            $member->setSeeking($_SESSION['seeking']);
+            $member->setBio($_SESSION['bio']);
+            $_SESSION['member'] = $member;
             $f3->reroute('/summary');
         }
     }
@@ -332,14 +361,20 @@ $f3->route('GET|POST /interests',
 
             }
 
-            // if all entries are valid, redirect the user to the next page
+            // if all entries are valid, set add activities to session
+            // variables and redirect the user to the next page
             if (validIndoor($hobby) && validOutdoor($activity))
             {
 
+                $premiumMember = $_SESSION['premiumMember'];
+                $premiumMember->setInDoorInterests($_SESSION['indoor']);
+                $premiumMember->setOutDoorInterests($_SESSION['outdoor']);
+                $_SESSION['premiumMember'] = $premiumMember;
                 $f3->reroute('/summary');
             }
 
-            // if no interests were selected redirect the user to the next page
+            // if no interests were selected, set session variables
+            // and redirect the user to the next page
             if (!isset($_POST['indoor']) && !isset($_POST['outdoor']))
             {
 
@@ -353,6 +388,15 @@ $f3->route('GET|POST /interests',
 
 //define a summary route
 $f3->route('GET|POST /summary', function(){
+
+    /*if (isset($_SESSION['premiumMember']))
+    {
+       print_r($_SESSION['premiumMember']);
+    }
+    else if (isset($_SESSION['member']))
+    {
+        print_r($_SESSION['member']);
+    } */
 
     $template = new Template();
     echo $template->render('views/summary.html');
