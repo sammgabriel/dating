@@ -19,8 +19,9 @@
 ini_set('display_errors',1);
 error_reporting(E_ALL);
 
-//require autoload
+//required files
 require_once('vendor/autoload.php');
+require_once 'model/database.php';
 
 //require form validation
 require_once('model/validation-functions.php');
@@ -32,6 +33,8 @@ $f3 = Base::instance();
 //turn on fat free error reporting
 $f3->set('DEBUG',3);
 
+//Connect to the database
+$dbh = connect();
 
 //define a default route
 $f3->route('GET /', function(){
