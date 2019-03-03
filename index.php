@@ -439,7 +439,11 @@ $f3->route('GET|POST /summary', function(){
 });
 
 //define a summary route
-$f3->route('GET|POST /admin', function(){
+$f3->route('GET|POST /admin', function($f3){
+
+    $members = getMembers();
+
+    $f3->set('members', $members);
 
     $template = new Template();
     echo $template->render('views/admin.html');

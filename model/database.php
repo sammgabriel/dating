@@ -51,6 +51,24 @@ function connect()
 function getMembers()
 {
 
+    global $dbh;
+
+    //1. define the query
+    $sql = "SELECT * FROM members ORDER BY lname, fname";
+
+    //2. prepare the statement
+    $statement = $dbh->prepare($sql);
+
+    //3. bind parameters
+
+    //4. execute the statement
+    $statement->execute();
+
+    //5. return the result
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+    //print_r($result);
+    return $result;
+
 }
 
 function insertMember($fname, $lname, $age, $gender, $phone, $email,

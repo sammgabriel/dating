@@ -20,6 +20,18 @@
 
     <hr>
 
+    <ol>
+        <repeat group="{{ @members }}" value="{{ @member }}">
+            <li><a href="#">{{ @member['lname'] }}, {{ @member['fname'] }}</a></li>
+        </repeat>
+
+        <!-- {{ @BASE }}/summary/{{ @student['sid'] }}-->
+    </ol>
+
+
+
+
+
 
 
 </div>
