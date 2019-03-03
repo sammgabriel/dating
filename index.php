@@ -438,7 +438,7 @@ $f3->route('GET|POST /summary', function(){
     echo $template->render('views/summary.html');
 });
 
-//define a summary route
+//define an admin page route
 $f3->route('GET|POST /admin', function($f3){
 
     $members = getMembers();
@@ -448,6 +448,50 @@ $f3->route('GET|POST /admin', function($f3){
     $template = new Template();
     echo $template->render('views/admin.html');
 });
+
+// define a user profile route
+$f3->route('GET|POST /user/@id',
+
+    function($f3, $params)
+    {
+        // Define parameters
+        $id = $params['id'];
+
+        $row = getMember($id);
+
+        if ($row['premium'] == 1) {
+
+            $f3->set('fname', $row['fname']);
+            $f3->set('lname', $row['lname']);
+            $f3->set('age', $row['age']);
+            $f3->set('gender', $row['gender']);
+            $f3->set('phone', $row['phone']);
+            $f3->set('email', $row['email']);
+            $f3->set('state', $row['state']);
+            $f3->set('seeking', $row['seeking']);
+            $f3->set('bio', $row['bio']);
+            $f3->set('premium', $row['premium']);
+            $f3->set('interests', $row['interests']);
+        }
+
+        else {
+
+            $f3->set('fname', $row['fname']);
+            $f3->set('lname', $row['lname']);
+            $f3->set('age', $row['age']);
+            $f3->set('gender', $row['gender']);
+            $f3->set('phone', $row['phone']);
+            $f3->set('email', $row['email']);
+            $f3->set('state', $row['state']);
+            $f3->set('seeking', $row['seeking']);
+            $f3->set('premium', $row['premium']);
+            $f3->set('bio', $row['bio']);
+        }
+
+        //load a template
+        $template = new Template();
+        echo $template->render('views/user.html');
+    });
 
 //run fat free
 $f3->run();

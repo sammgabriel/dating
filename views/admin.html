@@ -33,12 +33,10 @@
             <th>Premium</th>
             <th>Interests</th>
         </tr>
-
-        <ol>
             <repeat group="{{ @members }}" value="{{ @member }}">
                 <tr>
                     <td>{{ @member['member_id'] }}</td>
-                    <td><a href="#">{{ @member['fname'] }} {{ @member['lname'] }}</a></td>
+                    <td><a href="{{ @BASE }}/user/{{ @member['member_id'] }}">{{ @member['fname'] }} {{ @member['lname'] }}</a></td>
                     <td>{{ @member['age'] }}</td>
                     <td>{{ @member['phone'] }}</td>
                     <td>{{ @member['email'] }}</td>
@@ -58,17 +56,7 @@
                     <td>{{ @member['interests'] }}</td>
                 </tr>
             </repeat>
-        </ol>
-
     </table>
-
-
-
-
-
-
-
-
 
 </div>
 

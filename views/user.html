@@ -1,0 +1,53 @@
+<!--
+
+       Author Name: Samantha Gabriel
+       Date: March 2, 2019
+       File Name: user.html
+
+       Profile page for a given member
+
+       References:
+
+       Greasemann [CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)], from Wikimedia Commons
+
+    -->
+
+<!-- Displays all the member's information -->
+<h1>{{ @fname }}  {{ @lname }}</h1>
+
+<!-- Specify if the member is a premium member -->
+<check if="{{ @premium == 1}}">
+    <true>
+        <h3>Premium Member</h3>
+    </true>
+</check>
+
+<!-- Display profile picture if member is a premium member -->
+<check if="{{ @premium == 1}}">
+    <true>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
+             height="200px" width="200px" alt="avatar">
+    </true>
+</check>
+
+<p><strong>Age:</strong> {{ @age }}</p>
+
+<p><strong>Gender:</strong> {{ @gender }}</p>
+
+<p><strong>Email:</strong> {{ @email }}</p>
+
+<p><strong>State:</strong> {{ @state }}</p>
+
+<p><strong>Seeking:</strong> {{ @seeking }}</p>
+
+<p><strong>Bio:</strong> {{ @bio }}</p>
+
+<!-- Display interests if member is a premium member -->
+<check if="{{ @premium == 1}}">
+    <true>
+        <p><strong>Interests:</strong> {{ @interests }}</p>
+    </true>
+</check>
+
+<!-- Link back to the admin page -->
+<p><a href="/328/dating/admin">Back to Admin Page</a></p>

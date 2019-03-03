@@ -106,7 +106,25 @@ function insertMember($fname, $lname, $age, $gender, $phone, $email,
     return $success;
 }
 
-function getMember($id) {
+function getMember($id)
+{
 
+    global $dbh;
 
+    // Define query
+    $sql = "SELECT * FROM members WHERE member_id = :id";
+
+    // Prepare statement
+    $statement = $dbh->prepare($sql);
+
+    // Bind parameters
+    $statement->bindParam(':id', $id, PDO::PARAM_STR);
+
+    // Execute
+    $statement->execute();
+
+    // Process the result
+    $row = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $row;
 }
