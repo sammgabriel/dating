@@ -438,5 +438,12 @@ $f3->route('GET|POST /summary', function(){
     echo $template->render('views/summary.html');
 });
 
+//define a summary route
+$f3->route('GET|POST /admin', function(){
+
+    $template = new Template();
+    echo $template->render('views/admin.html');
+});
+
 //run fat free
 $f3->run();
