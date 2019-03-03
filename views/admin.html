@@ -20,13 +20,40 @@
 
     <hr>
 
-    <ol>
-        <repeat group="{{ @members }}" value="{{ @member }}">
-            <li><a href="#">{{ @member['lname'] }}, {{ @member['fname'] }}</a></li>
-        </repeat>
+    <table class="mt-4">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>State</th>
+            <th>Gender</th>
+            <th>Seeking</th>
+            <th>Premium</th>
+            <th>Interests</th>
+        </tr>
 
-        <!-- {{ @BASE }}/summary/{{ @student['sid'] }}-->
-    </ol>
+        <ol>
+            <repeat group="{{ @members }}" value="{{ @member }}">
+                <tr>
+                    <td>{{ @member['member_id'] }}</td>
+                    <td><a href="#">{{ @member['fname'] }} {{ @member['lname'] }}</a></td>
+                    <td>{{ @member['age'] }}</td>
+                    <td>{{ @member['phone'] }}</td>
+                    <td>{{ @member['email'] }}</td>
+                    <td>{{ @member['state'] }}</td>
+                    <td>{{ @member['gender'] }}</td>
+                    <td>{{ @member['seeking'] }}</td>
+                    <td>{{ @member['premium'] }}</td>
+                    <td>{{ @member['interests'] }}</td>
+                </tr>
+            </repeat>
+        </ol>
+
+    </table>
+
+
 
 
 

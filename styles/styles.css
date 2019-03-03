@@ -40,3 +40,15 @@
 
     margin-top: 5%;
 }
+
+/* Table Styles */
+table {
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+tr > th, td {
+    border: black 1px solid;
+    padding: 10px;
+    text-align: center;
+}
