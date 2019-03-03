@@ -269,13 +269,22 @@ $f3->route('GET|POST /profile',
         }
         else
         {
+
             $member = $_SESSION['member'];
             $member->setEmail($_SESSION['email']);
             $member->setState($_SESSION['state']);
             $member->setSeeking($_SESSION['seeking']);
             $member->setBio($_SESSION['bio']);
             $_SESSION['member'] = $member;
-            $f3->reroute('/summary');
+
+            $success = insertMember($member->getFirstName(), $member->getLastName(), $member->getAge(),
+                $member->getGender(), $member->getPhone(), $member->getEmail(), $member->getState(),
+                $member->getSeeking(), $member->getBio(), 0, "", "");
+
+            if ($success) {
+
+                $f3->reroute('/summary');
+            }
         }
     }
 
@@ -373,7 +382,20 @@ $f3->route('GET|POST /interests',
                 $premiumMember->setInDoorInterests($_SESSION['indoor']);
                 $premiumMember->setOutDoorInterests($_SESSION['outdoor']);
                 $_SESSION['premiumMember'] = $premiumMember;
-                $f3->reroute('/summary');
+
+                $outdoorHobbies = implode(", ", $outdoorHobbies);
+                $indoorHobbies = implode(", ", $indoorHobbies);
+
+                $interests = $indoorHobbies . ", " . $outdoorHobbies;
+
+                $success = insertMember($premiumMember->getFirstName(), $premiumMember->getLastName(), $premiumMember->getAge(),
+                    $premiumMember->getGender(), $premiumMember->getPhone(), $premiumMember->getEmail(), $premiumMember->getState(),
+                    $premiumMember->getSeeking(), $premiumMember->getBio(), 1, "", $interests);
+
+                if ($success) {
+
+                    $f3->reroute('/summary');
+                }
             }
 
             // if no interests were selected, set session variables
@@ -381,7 +403,18 @@ $f3->route('GET|POST /interests',
             if (!isset($_POST['indoor']) && !isset($_POST['outdoor']))
             {
 
-                $f3->reroute('/summary');
+                $premiumMember = $_SESSION['premiumMember'];
+
+                $interests = $indoorHobbies . ", " . $outdoorHobbies;
+
+                $success = insertMember($premiumMember->getFirstName(), $premiumMember->getLastName(), $premiumMember->getAge(),
+                    $premiumMember->getGender(), $premiumMember->getPhone(), $premiumMember->getEmail(), $premiumMember->getState(),
+                    $premiumMember->getSeeking(), $premiumMember->getBio(), 1, "", $interests);
+
+                if ($success) {
+
+                    $f3->reroute('/summary');
+                }
             }
         }
 
