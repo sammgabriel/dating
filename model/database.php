@@ -1,15 +1,25 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sammgabriel
- * Date: 2019-02-28
- * Time: 12:47
+/*
+ *
+ * Author Name: Samantha Gabriel
+ * Date: March 2, 2019
+ * File Name: database.php
+ *
+ * Database functionality of the dating website
+ *
+ * References:
+ *
+ * https://www.w3schools.com/sql/sql_create_table.asp
+ *
+ *
  */
 
 require("/home/sgabriel/config.php");
 
 /*
     CREATE TABLE statement
+
+    Referred to w3schools regarding the syntax of this statement
 
     CREATE TABLE members (
 
@@ -27,15 +37,21 @@ require("/home/sgabriel/config.php");
         image VARCHAR(10),
         interests VARCHAR(80)
     );
-
 */
 
+/**
+ *
+ * Connect to database
+ *
+ * @return PDO|void PDO object
+ *
+ */
 function connect()
 {
 
     try {
 
-        //Instantiate a database object
+        // Instantiate a database object
         $dbh = new PDO(DB_DSN, DB_USERNAME,
             DB_PASSWORD);
         //echo "Connected to database!!!";
@@ -43,49 +59,73 @@ function connect()
 
     } catch (PDOException $e) {
 
+        // Otherwise throw an exception
         echo $e->getMessage();
         return;
     }
 }
 
+/**
+ *
+ * Get all registered members of the website
+ *
+ * @return array array of rows from the database
+ *
+ */
 function getMembers()
 {
 
     global $dbh;
 
-    //1. define the query
+    // Define the query
     $sql = "SELECT * FROM members ORDER BY lname, fname";
 
-    //2. prepare the statement
+    // Prepare the statement
     $statement = $dbh->prepare($sql);
 
-    //3. bind parameters
-
-    //4. execute the statement
+    // Execute the statement
     $statement->execute();
 
-    //5. return the result
+    // Return the result
     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-    //print_r($result);
-    return $result;
 
+    return $result;
 }
 
+/**
+ *
+ * Add a newly registered member to the database
+ *
+ * @param $fname
+ * @param $lname
+ * @param $age
+ * @param $gender
+ * @param $phone
+ * @param $email
+ * @param $state
+ * @param $seeking
+ * @param $bio
+ * @param $premium
+ * @param $image
+ * @param $interests
+ * @return bool
+ *
+ */
 function insertMember($fname, $lname, $age, $gender, $phone, $email,
             $state, $seeking, $bio, $premium, $image, $interests)
 {
 
     global $dbh;
 
-    //1. define the query
+    // Define the query
     $sql = "INSERT INTO members (fname, lname, age, gender, phone, email, state, seeking, 
             bio, premium, image, interests) VALUES (:first, :last, :age, :gender, :phone, 
             :email, :state, :seeking, :bio, :premium, :image, :interests)";
 
-    //2. prepare the statement
+    // Prepare the statement
     $statement = $dbh->prepare($sql);
 
-    //3. bind parameters
+    // Bind parameters
     $statement->bindParam(':first', $fname, PDO::PARAM_STR);
     $statement->bindParam(':last', $lname, PDO::PARAM_STR);
     $statement->bindParam(':age', $age, PDO::PARAM_STR);
@@ -99,13 +139,21 @@ function insertMember($fname, $lname, $age, $gender, $phone, $email,
     $statement->bindParam(':image', $image, PDO::PARAM_STR);
     $statement->bindParam(':interests', $interests, PDO::PARAM_STR);
 
-    //4. execute the statement
+    // Execute the statement
     $success = $statement->execute();
 
-    //5. return the result
+    // Return the result
     return $success;
 }
 
+/**
+ *
+ * Get a specific member from the database
+ *
+ * @param $id
+ * @return mixed
+ *
+ */
 function getMember($id)
 {
 

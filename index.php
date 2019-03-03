@@ -423,7 +423,8 @@ $f3->route('GET|POST /interests',
 });
 
 //define a summary route
-$f3->route('GET|POST /summary', function(){
+$f3->route('GET|POST /summary', function()
+{
 
     /*if (isset($_SESSION['premiumMember']))
     {
@@ -439,10 +440,10 @@ $f3->route('GET|POST /summary', function(){
 });
 
 //define an admin page route
-$f3->route('GET|POST /admin', function($f3){
+$f3->route('GET|POST /admin', function($f3) {
 
+    // Create a variable for the array of members
     $members = getMembers();
-
     $f3->set('members', $members);
 
     $template = new Template();
@@ -452,15 +453,19 @@ $f3->route('GET|POST /admin', function($f3){
 // define a user profile route
 $f3->route('GET|POST /user/@id',
 
-    function($f3, $params)
-    {
+    function($f3, $params) {
+
         // Define parameters
         $id = $params['id'];
 
+        // Create variables for all of the data in the row
         $row = getMember($id);
 
-        if ($row['premium'] == 1) {
+        // Create variables for all of the data the specified row
+        if ($row['premium'] == 1)
+        {
 
+            // Variables for a premium member
             $f3->set('fname', $row['fname']);
             $f3->set('lname', $row['lname']);
             $f3->set('age', $row['age']);
@@ -472,10 +477,11 @@ $f3->route('GET|POST /user/@id',
             $f3->set('bio', $row['bio']);
             $f3->set('premium', $row['premium']);
             $f3->set('interests', $row['interests']);
-        }
 
-        else {
+        } else
+        {
 
+            // Variables for a standard member
             $f3->set('fname', $row['fname']);
             $f3->set('lname', $row['lname']);
             $f3->set('age', $row['age']);
@@ -488,7 +494,7 @@ $f3->route('GET|POST /user/@id',
             $f3->set('bio', $row['bio']);
         }
 
-        //load a template
+        // Load a template
         $template = new Template();
         echo $template->render('views/user.html');
     });

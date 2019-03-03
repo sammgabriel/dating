@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--
+
+       Author Name: Samantha Gabriel
+       Date: March 2, 2019
+       File Name: admin.html
+
+       This is the admin page of the dating website that displays
+       all registered members
+
+       References:
+
+       https://www.w3schools.com/tags/att_input_disabled.asp
+
+    -->
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
@@ -20,6 +34,7 @@
 
     <hr>
 
+    <!-- Table of members and their information -->
     <table class="mt-4">
         <tr>
             <th>ID</th>
@@ -36,6 +51,7 @@
             <repeat group="{{ @members }}" value="{{ @member }}">
                 <tr>
                     <td>{{ @member['member_id'] }}</td>
+                    <!-- Data in this coumn links to the corresponding user's profile -->
                     <td><a href="{{ @BASE }}/user/{{ @member['member_id'] }}">{{ @member['fname'] }} {{ @member['lname'] }}</a></td>
                     <td>{{ @member['age'] }}</td>
                     <td>{{ @member['phone'] }}</td>
@@ -44,8 +60,10 @@
                     <td>{{ @member['gender'] }}</td>
                     <td>{{ @member['seeking'] }}</td>
                     <td>
+                        <!-- Displays a checked checkbox if the user is a premium member -->
                         <check if="{{ @member['premium'] == 1}}">
                             <true>
+                                <!-- Referred to w3schools regarding how to make a checkbox disabled -->
                                 <input type="checkbox" checked="checked" disabled>
                             </true>
                             <false>
